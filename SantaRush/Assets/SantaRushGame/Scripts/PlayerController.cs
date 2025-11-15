@@ -78,6 +78,6 @@ public class PlayerController : MonoBehaviour
     public void OnJumpAnimationEnd()
     {
         if (animator != null)
-            animator.SetBool("isJumping", true);
+            animator.SetBool("isJumping", false);
     }
 }
