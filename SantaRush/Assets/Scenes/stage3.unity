@@ -270,7 +270,7 @@ Transform:
   m_GameObject: {fileID: 851423336}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.11, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1837,7 +1837,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 9
-      m_TileSpriteIndex: 9
+      m_TileSpriteIndex: 13
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -2222,16 +2222,16 @@ Tilemap:
     m_Data: {fileID: -1151356657, guid: 3361be2ea2a5dd541ab543b5d340b979, type: 3}
   - m_RefCount: 5
     m_Data: {fileID: -107563782, guid: 3361be2ea2a5dd541ab543b5d340b979, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1836817899, guid: 3361be2ea2a5dd541ab543b5d340b979, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 6
     m_Data: {fileID: -761392704, guid: 3361be2ea2a5dd541ab543b5d340b979, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: -575632350, guid: 3361be2ea2a5dd541ab543b5d340b979, type: 3}
   - m_RefCount: 42
     m_Data: {fileID: 1367336764, guid: 3361be2ea2a5dd541ab543b5d340b979, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1836817899, guid: 3361be2ea2a5dd541ab543b5d340b979, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 149
     m_Data:
@@ -2358,7 +2358,7 @@ Camera:
   m_GameObject: {fileID: 961739749}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -2383,8 +2383,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
