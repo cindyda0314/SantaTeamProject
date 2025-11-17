@@ -387,7 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1355151898}
   - component: {fileID: 1355151897}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 2106722934}
   - component: {fileID: 2106722933}
   - component: {fileID: 2106722938}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform_s1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1921,6 +1921,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 336979284770758536, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 695283370539292212, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2841894360841622841, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2847728445300810014, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.55
@@ -1960,6 +1972,10 @@ PrefabInstance:
     - target: {fileID: 2847728445300810014, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644074177373177198, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: maxJumps
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5644074177373177198, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: enableDoubleJump
