@@ -44,6 +44,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 398901281
+    locked: 0
+  - name: Environment
+    uniqueID: 2823069049
+    locked: 0
+  - name: Characters
+    uniqueID: 3368406565
+    locked: 0
+  - name: Effects
+    uniqueID: 2468731615
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1
