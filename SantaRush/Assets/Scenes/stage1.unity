@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: 48913575}
   - component: {fileID: 48913577}
   - component: {fileID: 48913576}
+  - component: {fileID: 48913578}
   m_Layer: 0
   m_Name: christmas-stocking (1)
   m_TagString: Item
@@ -490,6 +491,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &48913578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48913574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3247addc567ce4baefa9f8eb673007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -784,6 +797,7 @@ GameObject:
   - component: {fileID: 290511281}
   - component: {fileID: 290511283}
   - component: {fileID: 290511282}
+  - component: {fileID: 290511284}
   m_Layer: 0
   m_Name: christmas-stocking (4)
   m_TagString: Item
@@ -897,6 +911,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &290511284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290511280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3247addc567ce4baefa9f8eb673007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &325934659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,7 +1616,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0000009536743, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1600,7 +1626,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.56210136, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &618673001
 SpriteRenderer:
@@ -1725,6 +1751,7 @@ GameObject:
   - component: {fileID: 627852433}
   - component: {fileID: 627852435}
   - component: {fileID: 627852434}
+  - component: {fileID: 627852436}
   m_Layer: 0
   m_Name: christmas-stocking (7)
   m_TagString: Item
@@ -1838,6 +1865,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &627852436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627852432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3247addc567ce4baefa9f8eb673007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &637937439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,6 +1887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 637937441}
   - component: {fileID: 637937440}
+  - component: {fileID: 637937442}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1892,6 +1932,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &637937442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637937439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b805d2087c66e694ca6ce7f19eecf068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &640582173
 GameObject:
   m_ObjectHideFlags: 0
@@ -2466,7 +2518,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 4.04
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2491,7 +2543,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3500001, y: 2.7099998, z: -10}
+  m_LocalPosition: {x: 0.6267109, y: 1.086, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2641,7 +2693,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.013683319, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2651,7 +2703,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.53473663, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &965777023
 SpriteRenderer:
@@ -2975,6 +3027,7 @@ GameObject:
   - component: {fileID: 1269033028}
   - component: {fileID: 1269033030}
   - component: {fileID: 1269033029}
+  - component: {fileID: 1269033031}
   m_Layer: 0
   m_Name: christmas-stocking (6)
   m_TagString: Item
@@ -3088,6 +3141,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1269033031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269033027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3247addc567ce4baefa9f8eb673007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1309878527
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,6 +3164,7 @@ GameObject:
   - component: {fileID: 1309878528}
   - component: {fileID: 1309878530}
   - component: {fileID: 1309878529}
+  - component: {fileID: 1309878531}
   m_Layer: 0
   m_Name: christmas-stocking (5)
   m_TagString: Item
@@ -3212,6 +3278,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1309878531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309878527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3247addc567ce4baefa9f8eb673007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1355151896
 GameObject:
   m_ObjectHideFlags: 0
@@ -3663,7 +3741,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.027368546, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3673,7 +3751,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.56209946, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1441388756
 GameObject:
@@ -3686,6 +3764,7 @@ GameObject:
   - component: {fileID: 1441388757}
   - component: {fileID: 1441388759}
   - component: {fileID: 1441388758}
+  - component: {fileID: 1441388760}
   m_Layer: 0
   m_Name: christmas-stocking
   m_TagString: Item
@@ -3799,6 +3878,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1441388760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441388756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3247addc567ce4baefa9f8eb673007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1457477582
 GameObject:
   m_ObjectHideFlags: 0
@@ -3810,6 +3901,7 @@ GameObject:
   - component: {fileID: 1457477583}
   - component: {fileID: 1457477585}
   - component: {fileID: 1457477584}
+  - component: {fileID: 1457477586}
   m_Layer: 0
   m_Name: christmas-stocking (2)
   m_TagString: Item
@@ -3923,6 +4015,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1457477586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457477582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d3247addc567ce4baefa9f8eb673007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1486866877
 GameObject:
   m_ObjectHideFlags: 0
@@ -4021,7 +4125,7 @@ MonoBehaviour:
   CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: -0.15, y: 0.27}
+    ScreenPosition: {x: -0.43, y: 0.2}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -4062,7 +4166,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 6
+    OrthographicSize: 4.04
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -4089,7 +4193,7 @@ Transform:
   m_GameObject: {fileID: 1528323881}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3500001, y: 2.7099998, z: -10}
+  m_LocalPosition: {x: 0.6267109, y: 1.086, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4324,7 +4428,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.013685226, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4334,7 +4438,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5894737, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1788301659
 GameObject:
@@ -4463,7 +4567,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.005569458, y: 0.011136651}
+  m_Offset: {x: -0.049168587, y: 0.011136651}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4473,7 +4577,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8552208, y: 0.93317914}
+  m_Size: {x: 0.7457447, y: 0.93317914}
   m_EdgeRadius: 0
 --- !u!212 &1806938659
 SpriteRenderer:
@@ -4564,7 +4668,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.05473709, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4574,7 +4678,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8905258, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1811854324
 GameObject:
@@ -4773,7 +4877,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.041053057, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4783,7 +4887,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.58947134, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1853217874
 GameObject:
@@ -5022,7 +5126,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.013685226, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5032,7 +5136,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.80842113, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &2030245646
 GameObject:
@@ -6573,6 +6677,14 @@ PrefabInstance:
     - target: {fileID: 695283370539292212, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609083398523918466, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5894704
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609083398523918466, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.058600187
       objectReference: {fileID: 0}
     - target: {fileID: 2841894360841622841, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_Layer
