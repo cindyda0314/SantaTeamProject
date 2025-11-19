@@ -1,20 +1,22 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class EnemyDamageManager : MonoBehaviour
+public class DamageManager : MonoBehaviour
 {
-    public static EnemyDamageManager Instance;
+    public static DamageManager Instance;
 
     [System.Serializable]
-    public struct EnemyData
+    public struct DamageData
     {
-        public string enemyName; // 적의 이름 (하이어라키 창의 이름)
-        public int damage;       // 깎일 HP 양
+        public string objectName;  // 적 또는 장애물 이름
+        public int damage;
     }
 
     [Header("적 데미지 리스트")]
-    // 여기에 gingerbread, snowman2 등을 등록합니다.
-    public List<EnemyData> enemyList; 
+    public List<DamageData> enemyList = new List<DamageData>();
+
+    [Header("장애물 데미지 리스트")]
+    public List<DamageData> obstacleList = new List<DamageData>();
 
     private Dictionary<string, int> damageDictionary = new Dictionary<string, int>();
 
@@ -23,36 +25,34 @@ public class EnemyDamageManager : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        foreach (var data in enemyList)
+        // 적 + 장애물 통합 등록
+        AddListToDictionary(enemyList);
+        AddListToDictionary(obstacleList);
+    }
+
+    private void AddListToDictionary(List<DamageData> list)
+    {
+        foreach (var data in list)
         {
-            // 딕셔너리에 이름과 데미지 저장
-            if (!damageDictionary.ContainsKey(data.enemyName))
-            {
-                damageDictionary.Add(data.enemyName, data.damage);
-            }
+            if (!damageDictionary.ContainsKey(data.objectName))
+                damageDictionary.Add(data.objectName, data.damage);
         }
     }
 
     public int GetDamageByName(string name)
     {
-        // 1. 정확히 일치하는 이름 찾기
+        // 정확히 일치
         if (damageDictionary.ContainsKey(name))
-        {
             return damageDictionary[name];
-        }
-        
-        // 2. "snowman2(Clone)" 처럼 뒤에 복제 표시가 붙은 경우 처리
-        // 등록된 이름이 포함되어 있으면 해당 데미지 리턴
+
+        // Clone 호환
         foreach (var key in damageDictionary.Keys)
         {
             if (name.Contains(key))
-            {
                 return damageDictionary[key];
-            }
         }
 
-        // 3. 등록 안 된 적이라면 기본 데미지 10
-        Debug.LogWarning($"'{name}'의 데미지 정보가 없습니다. 기본값 10을 적용합니다.");
-        return 10; 
+        Debug.LogWarning($"'{name}' 데미지 정보 없음 → 기본 10 적용");
+        return 10;
     }
 }

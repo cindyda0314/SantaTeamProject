@@ -270,14 +270,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList:
-  - enemyName: gingerbread
-    damage: 10
-  - enemyName: snowman2
+  - objectName: 
     damage: 20
-  - enemyName: snowman3
-    damage: 30
-  - enemyName: spider
-    damage: 30
+  obstacleList: []
 --- !u!4 &566311297
 Transform:
   m_ObjectHideFlags: 0
