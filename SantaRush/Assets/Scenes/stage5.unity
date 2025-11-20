@@ -387,9 +387,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1253817161}
   - component: {fileID: 1253817160}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -452,14 +452,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList:
-  - enemyName: gingerbread
+  - objectName: 
     damage: 10
-  - enemyName: snowman2
+  - objectName: 
     damage: 20
-  - enemyName: snowman3
+  - objectName: 
     damage: 30
-  - enemyName: spider
+  - objectName: 
     damage: 30
+  obstacleList: []
 --- !u!4 &1530247051
 Transform:
   m_ObjectHideFlags: 0
@@ -490,6 +491,14 @@ PrefabInstance:
     - target: {fileID: 336979284770758536, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 695283370539292212, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 695283370539292212, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.53
       objectReference: {fileID: 0}
     - target: {fileID: 2847728445300810014, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -574,7 +583,7 @@ GameObject:
   - component: {fileID: 1700009529}
   - component: {fileID: 1700009528}
   - component: {fileID: 1700009527}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform_s5
   m_TagString: Untagged
   m_Icon: {fileID: 0}

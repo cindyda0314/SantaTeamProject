@@ -319,6 +319,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 695283370539292212, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.52
+      objectReference: {fileID: 0}
     - target: {fileID: 2847728445300810014, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.55
@@ -402,7 +406,7 @@ GameObject:
   - component: {fileID: 851423340}
   - component: {fileID: 851423339}
   - component: {fileID: 851423338}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform_s3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4706,9 +4710,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1376144980}
   - component: {fileID: 1376144979}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

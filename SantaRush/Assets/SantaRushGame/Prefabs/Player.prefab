@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5644074177373177198}
   - component: {fileID: 7755861060366324782}
   - component: {fileID: 1609083398523918466}
+  - component: {fileID: 8297560583245245259}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -926560731
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bd237637f8cdbb54a9a14d0fcd68d433, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,7 +134,7 @@ MonoBehaviour:
   groundRadius: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8
   doubleJumpInputDelay: 0.25
 --- !u!50 &7755861060366324782
 Rigidbody2D:
@@ -199,6 +200,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0.044915915, y: 0.017371476}
   m_Size: {x: 0.99999857, y: 1.07755}
   m_Direction: 0
+--- !u!114 &8297560583245245259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336979284770758536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baf05277bdb141c409916f7a7e52946c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  invincibilityTime: 1.5
+  knockbackForce: 5
+  stunTime: 0.2
 --- !u!1 &2841894360841622841
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +241,7 @@ Transform:
   m_GameObject: {fileID: 2841894360841622841}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -376,9 +376,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 336979284770758536, guid: a4b001252280e054483086ca52aaedac, type: 3}
-      propertyPath: m_TagString
-      value: Player
+    - target: {fileID: 695283370539292212, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 2847728445300810014, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -420,43 +420,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3686435802211160422, guid: a4b001252280e054483086ca52aaedac, type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3686435802211160422, guid: a4b001252280e054483086ca52aaedac, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -926560731
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 336979284770758536, guid: a4b001252280e054483086ca52aaedac, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 50572207}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4b001252280e054483086ca52aaedac, type: 3}
---- !u!1 &50572205 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 336979284770758536, guid: a4b001252280e054483086ca52aaedac, type: 3}
-  m_PrefabInstance: {fileID: 50572204}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &50572207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50572205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baf05277bdb141c409916f7a7e52946c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  invincibilityTime: 1.5
-  knockbackForce: 5
-  stunTime: 0.2
 --- !u!1 &67087938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,7 +1443,7 @@ GameObject:
   - component: {fileID: 851423340}
   - component: {fileID: 851423339}
   - component: {fileID: 851423338}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platform_s2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5614,9 +5582,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1376144980}
   - component: {fileID: 1376144979}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
