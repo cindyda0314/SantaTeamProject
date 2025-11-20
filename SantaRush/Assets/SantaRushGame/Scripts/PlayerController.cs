@@ -21,9 +21,8 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = false;
     private int jumpCount = 0;
 
-    // 빠른 더블점프 입력
-    private float lastJumpTime = 0f;
-    public float doubleJumpInputDelay = 0.25f;
+    // ⭐ 입력 버퍼
+    private bool jumpPressed = false;
 
     void Start()
     {
@@ -45,32 +44,36 @@ public class PlayerController : MonoBehaviour
         if (moveX < 0) spriteRenderer.flipX = true;
         if (moveX > 0) spriteRenderer.flipX = false;
 
+        // ⭐ Space 입력 버퍼 처리
+        if (Input.GetKeyDown(KeyCode.Space))
+            jumpPressed = true;
+
         // Ground 체크
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
         if (isGrounded)
         {
             jumpCount = 0;
-            animator.SetBool("isJumping", false);  // 착지 → 점프 종료
+            animator.SetBool("isJumping", false); 
         }
 
-        // 점프 / 더블점프
-        if (Input.GetKeyDown(KeyCode.Space))
+        // ⭐ 점프 실행 (입력 버퍼 사용)
+        if (jumpPressed)
         {
             // 1단 점프
             if (isGrounded && jumpCount == 0)
             {
                 Jump();
-                lastJumpTime = Time.time;
             }
-            // 2단 점프 (빠르게 눌러야)
+            // 2단 점프
             else if (!isGrounded && jumpCount == 1 && enableDoubleJump)
             {
-                if (Time.time - lastJumpTime <= doubleJumpInputDelay)
-                    Jump();
+                Jump();
             }
+
+            jumpPressed = false; // 입력 소비
         }
 
-        // 이동 속도 애니메이션
+        // 애니메이션 이동값
         animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
@@ -80,13 +83,20 @@ public class PlayerController : MonoBehaviour
 
         float force = jumpForce;
 
-        // 더블점프는 더 높게
+        // 2단 점프는 높게
         if (jumpCount == 2)
             force = jumpForce * 1.3f;
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
 
-        animator.SetBool("isJumping", true);  // 점프 애니메이션 시작
+        animator.SetBool("isJumping", true);
+    }
+
+    // Jump 애니메이션 끝 이벤트
+    public void OnJumpAnimationEnd()
+    {
+        if (animator != null)
+            animator.SetBool("isJumping", false);
     }
 
     private void OnDrawGizmosSelected()
