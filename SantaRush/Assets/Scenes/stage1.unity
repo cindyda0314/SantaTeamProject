@@ -5188,7 +5188,7 @@ GameObject:
   - component: {fileID: 2106722938}
   m_Layer: 3
   m_Name: Platform_s1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6676,7 +6676,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 695283370539292212, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.702
       objectReference: {fileID: 0}
     - target: {fileID: 1609083398523918466, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_Size.x
@@ -6747,8 +6747,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5644074177373177198, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: groundRadius
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644074177373177198, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: enableDoubleJump
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644074177373177198, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
