@@ -21,8 +21,8 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = false;
     private int jumpCount = 0;
 
-    // ⭐ 입력 버퍼
-    private bool jumpPressed = false;
+    // ⭐ 점프 입력 버퍼(절대 씹히지 않음)
+    private bool jumpQueued = false;
 
     void Start()
     {
@@ -44,20 +44,26 @@ public class PlayerController : MonoBehaviour
         if (moveX < 0) spriteRenderer.flipX = true;
         if (moveX > 0) spriteRenderer.flipX = false;
 
-        // ⭐ Space 입력 버퍼 처리
+        // ⭐ 점프 입력 저장(버퍼)
         if (Input.GetKeyDown(KeyCode.Space))
-            jumpPressed = true;
+            jumpQueued = true;
 
         // Ground 체크
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
         if (isGrounded)
         {
             jumpCount = 0;
-            animator.SetBool("isJumping", false); 
+            animator.SetBool("isJumping", false);
         }
 
-        // ⭐ 점프 실행 (입력 버퍼 사용)
-        if (jumpPressed)
+        // 애니메이션 이동값
+        animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+    }
+
+    void FixedUpdate()
+    {
+        // ⭐ FixedUpdate에서 점프 처리 → 입력 안 씹힘
+        if (jumpQueued)
         {
             // 1단 점프
             if (isGrounded && jumpCount == 0)
@@ -70,11 +76,9 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
 
-            jumpPressed = false; // 입력 소비
+            // 입력 소모
+            jumpQueued = false;
         }
-
-        // 애니메이션 이동값
-        animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
     void Jump()
@@ -83,10 +87,11 @@ public class PlayerController : MonoBehaviour
 
         float force = jumpForce;
 
-        // 2단 점프는 높게
+        // 2단 점프는 살짝 높게(너 기존 코드 유지)
         if (jumpCount == 2)
             force = jumpForce * 1.3f;
 
+        // 점프 힘 적용
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
 
         animator.SetBool("isJumping", true);

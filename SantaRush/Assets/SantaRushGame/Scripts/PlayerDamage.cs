@@ -22,6 +22,9 @@ public class PlayerDamage : MonoBehaviour
     // ⭐ 시작 위치 저장용
     private Vector3 startPosition;
 
+    [Header("낙사 설정")]
+    public float deathY = -10f;  
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -156,8 +159,11 @@ public class PlayerDamage : MonoBehaviour
     // 낙사 처리
     void Update()
     {
-        // ★ 일정 높이 아래로 떨어지면 즉시 죽음 → 리스폰
-        if (transform.position.y < -10f)  // 원하면 -15f, -20f 등으로 조절 가능
+        // Rigidbody 가져오기 (필요하면 Start에서 선언해도 됨)
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        // ⭐ 위치 조건 + 속도 조건 둘 다 충족해야 낙사 처리
+        if (transform.position.y < deathY && rb.linearVelocity.y < -8f)
         {
             Debug.Log("낙사로 사망!");
             Respawn();
