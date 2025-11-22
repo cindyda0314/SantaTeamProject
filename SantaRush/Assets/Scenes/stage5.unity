@@ -7675,11 +7675,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 695283370539292212, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.06
+      value: 0.077
       objectReference: {fileID: 0}
     - target: {fileID: 695283370539292212, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41
+      value: -0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609083398523918466, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_Size.x
+      value: 0.79770947
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609083398523918466, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0421494
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609083398523918466, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.029744148
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609083398523918466, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.03507179
       objectReference: {fileID: 0}
     - target: {fileID: 2847728445300810014, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7719,6 +7735,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2847728445300810014, guid: a4b001252280e054483086ca52aaedac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644074177373177198, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: groundRadius
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755861060366324782, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7755861060366324782, guid: a4b001252280e054483086ca52aaedac, type: 3}
+      propertyPath: m_CollisionDetection
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8297560583245245259, guid: a4b001252280e054483086ca52aaedac, type: 3}
