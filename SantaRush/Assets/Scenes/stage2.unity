@@ -178,7 +178,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9071920}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1218,7 +1218,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411119961}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -4102,6 +4102,14 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 3549979c65fb6ca44b673c0c7dadab20, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 528215d23e2415c4dbb9ebf10cc66483, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 4
     m_Data: {fileID: -2108416939, guid: e6ba42cb6b4d58649ab44723e347081b, type: 3}
@@ -4133,6 +4141,14 @@ Tilemap:
     m_Data: {fileID: 1482144746, guid: e6ba42cb6b4d58649ab44723e347081b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1785660942, guid: e6ba42cb6b4d58649ab44723e347081b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 189
     m_Data:
@@ -4152,6 +4168,42 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
+  - m_RefCount: 0
+    m_Data:
+      e00: 2.35e-43
+      e01: 0
+      e02: 1e-45
+      e03: 7.858043e-10
+      e10: 0
+      e11: 0
+      e12: 0
+      e13: 4.19e-43
+      e20: 0.0004209238
+      e21: 7.858043e-10
+      e22: 3.792622e+19
+      e23: -4.462379e-19
+      e30: 4.5912e-41
+      e31: 4.19e-43
+      e32: 4.22e-43
+      e33: 4.19e-43
+  - m_RefCount: 0
+    m_Data:
+      e00: 1e-45
+      e01: 0
+      e02: 1e-45
+      e03: 7.858043e-10
+      e10: 0
+      e11: 0
+      e12: 0
+      e13: 4.19e-43
+      e20: 0.0004209238
+      e21: 7.858043e-10
+      e22: 3.774319e+19
+      e23: -2.0871183e-19
+      e30: 4.5912e-41
+      e31: 4.19e-43
+      e32: 4.22e-43
+      e33: 4.19e-43
   m_TileColorArray:
   - m_RefCount: 189
     m_Data: {r: 1, g: 1, b: 1, a: 1}
@@ -4159,7 +4211,7 @@ Tilemap:
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: -6, z: 0}
-  m_Size: {x: 94, y: 14, z: 1}
+  m_Size: {x: 94, y: 23, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -4238,7 +4290,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905099325}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -4833,7 +4885,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.04
+  orthographic size: 4.3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4858,7 +4910,7 @@ Transform:
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2872319, y: -0.12599987, z: -10}
+  m_LocalPosition: {x: -4.7855554, y: -0.6159999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6137,7 +6189,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471864617}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -6338,7 +6390,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1698309746}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -6513,7 +6565,7 @@ MonoBehaviour:
   CameraDistance: 10
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: -0.44, y: 0.05}
+    ScreenPosition: {x: -0.05, y: -0.01}
     DeadZone:
       Enabled: 0
       Size: {x: 0.2, y: 0.2}
@@ -6554,7 +6606,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 60
-    OrthographicSize: 4.04
+    OrthographicSize: 4.3
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -6581,7 +6633,7 @@ Transform:
   m_GameObject: {fileID: 1772281590}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2872319, y: -0.12599987, z: -10}
+  m_LocalPosition: {x: -4.7855554, y: -0.6159999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
