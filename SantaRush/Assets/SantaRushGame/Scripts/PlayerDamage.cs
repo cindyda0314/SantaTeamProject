@@ -46,7 +46,7 @@ public class PlayerDamage : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            ReloadScene();  // ★ 씬 리로드
+            Die();    // ★ 죽음 처리 함수 호출
         }
         else
         {
@@ -59,7 +59,7 @@ public class PlayerDamage : MonoBehaviour
         TakeDamage(damage, transform.position);
     }
 
-    // 넉백
+    // 넉백 처리
     IEnumerator KnockbackRoutine(Vector2 sourcePos)
     {
         if (playerController != null)
@@ -77,7 +77,7 @@ public class PlayerDamage : MonoBehaviour
             playerController.enabled = true;
     }
 
-    // 무적 깜빡임
+    // 무적 깜박임
     IEnumerator InvincibilityRoutine()
     {
         isInvincible = true;
@@ -100,11 +100,18 @@ public class PlayerDamage : MonoBehaviour
         isInvincible = false;
     }
 
-    // ★ 씬 리로드 함수
-    void ReloadScene()
+    // ★ 죽음 처리
+    void Die()
     {
-        Debug.Log("산타 사망 → 씬 다시 로드!");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("산타 사망!");
+        rb.linearVelocity = Vector2.zero;
+
+        // ★ 최신 함수 사용: FindFirstObjectByType
+        var uiManager = FindFirstObjectByType<UIGameManager>();
+        if (uiManager != null)
+        {
+            uiManager.ShowGameOver();
+        }
     }
 
     // 적 충돌
@@ -136,11 +143,10 @@ public class PlayerDamage : MonoBehaviour
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
-        // y가 deathY 아래 + 충분히 떨어지고 있는 속도일 때
         if (transform.position.y < deathY && rb.linearVelocity.y < -8f)
         {
             Debug.Log("낙사로 사망!");
-            ReloadScene();   // ★ 낙사도 씬 리로드
+            Die();   // ★ 낙사도 동일한 처리
         }
     }
 }
