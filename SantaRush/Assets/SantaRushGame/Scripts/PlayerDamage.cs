@@ -1,16 +1,17 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerDamage : MonoBehaviour
 {
     [Header("체력 설정")]
-    [SerializeField] private int maxHealth = 100; 
+    [SerializeField] private int maxHealth = 100;
     private int currentHealth;
 
     [Header("무적 및 피격 설정")]
-    [SerializeField] private float invincibilityTime = 1.5f; 
-    [SerializeField] private float knockbackForce = 5.0f;     
-    [SerializeField] private float stunTime = 0.2f;           
+    [SerializeField] private float invincibilityTime = 1.5f;
+    [SerializeField] private float knockbackForce = 5.0f;
+    [SerializeField] private float stunTime = 0.2f;
 
     private bool isInvincible = false;
 
@@ -19,11 +20,8 @@ public class PlayerDamage : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private PlayerController playerController;
 
-    // ⭐ 시작 위치 저장용
-    private Vector3 startPosition;
-
     [Header("낙사 설정")]
-    public float deathY = -10f;  
+    public float deathY = -10f;
 
     void Start()
     {
@@ -32,9 +30,6 @@ public class PlayerDamage : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerController = GetComponent<PlayerController>();
-
-        // ⭐ 현재 위치를 시작 위치로 저장
-        startPosition = transform.position;
 
         Debug.Log($"게임 시작! 산타 체력: {currentHealth}");
     }
@@ -51,7 +46,7 @@ public class PlayerDamage : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Respawn();
+            ReloadScene();  // ★ 씬 리로드
         }
         else
         {
@@ -67,7 +62,7 @@ public class PlayerDamage : MonoBehaviour
     // 넉백
     IEnumerator KnockbackRoutine(Vector2 sourcePos)
     {
-        if (playerController != null) 
+        if (playerController != null)
             playerController.enabled = false;
 
         Vector2 knockbackDir = (transform.position - (Vector3)sourcePos).normalized;
@@ -105,31 +100,11 @@ public class PlayerDamage : MonoBehaviour
         isInvincible = false;
     }
 
-    // ⭐ 사망 → 리스폰
-    void Respawn()
+    // ★ 씬 리로드 함수
+    void ReloadScene()
     {
-        Debug.Log("산타 사망 → 리스폰!");
-
-        // 체력 복구
-        currentHealth = maxHealth;
-
-        // 위치 초기화
-        transform.position = startPosition;
-
-        // 조작 다시 켜기
-        if (playerController != null) 
-            playerController.enabled = true;
-
-        // 속도 초기화
-        rb.linearVelocity = Vector2.zero;
-
-        // 무적 해제
-        isInvincible = false;
-
-        // 색상 초기화
-        spriteRenderer.color = Color.white;
-
-        Debug.Log("처음 위치로 돌아가기!");
+        Debug.Log("산타 사망 → 씬 다시 로드!");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // 적 충돌
@@ -159,14 +134,13 @@ public class PlayerDamage : MonoBehaviour
     // 낙사 처리
     void Update()
     {
-        // Rigidbody 가져오기 (필요하면 Start에서 선언해도 됨)
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
-        // ⭐ 위치 조건 + 속도 조건 둘 다 충족해야 낙사 처리
+        // y가 deathY 아래 + 충분히 떨어지고 있는 속도일 때
         if (transform.position.y < deathY && rb.linearVelocity.y < -8f)
         {
             Debug.Log("낙사로 사망!");
-            Respawn();
+            ReloadScene();   // ★ 낙사도 씬 리로드
         }
     }
 }
