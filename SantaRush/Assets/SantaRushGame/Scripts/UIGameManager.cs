@@ -3,35 +3,32 @@ using UnityEngine.SceneManagement;
 
 public class UIGameManager : MonoBehaviour
 {
+    private static bool isRetry = false;   // ⭐ 씬 재시작 여부 저장
+
     [Header("UI 패널")]
-    public GameObject titleScreenPanel;   // Panel
-    public GameObject gameOverPanel;      // Panel2
+    public GameObject titleScreenPanel;   // 시작 화면
+    public GameObject gameOverPanel;      // 게임 오버 화면
 
     void Start()
     {
-        // 처음 실행인지 체크
-        bool isFirstStart = PlayerPrefs.GetInt("FirstStart", 1) == 1;
-
-        if (isFirstStart)
+        // ⭐ Retry로 들어온 경우: titleScreen을 보여주지 않음
+        if (isRetry)
         {
-            // 처음 시작일 때만 타이틀 패널 표시
-            titleScreenPanel.SetActive(true);
-            gameOverPanel.SetActive(false);
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            // Retry로 돌아온 경우 바로 게임 시작
             titleScreenPanel.SetActive(false);
             gameOverPanel.SetActive(false);
             Time.timeScale = 1f;
+            return;
         }
+
+        // ⭐ 게임 처음 실행한 경우만 타이틀 표시
+        titleScreenPanel.SetActive(true);
+        gameOverPanel.SetActive(false);
+        Time.timeScale = 0f;
     }
 
     // Start 버튼
     public void StartGame()
     {
-        PlayerPrefs.SetInt("FirstStart", 0);
         titleScreenPanel.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -46,7 +43,7 @@ public class UIGameManager : MonoBehaviour
     // Retry 버튼
     public void RetryGame()
     {
-        PlayerPrefs.SetInt("FirstStart", 0); // 다시 시작 = 처음 아님
+        isRetry = true; // ⭐ 다음 씬 로드 때는 타이틀 안 보여주기
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;   // Slider
+using TMPro;            // TMP 텍스트
 using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class PlayerDamage : MonoBehaviour
 {
+    [Header("UI")]
+    public Slider healthBar;                // 체력바
+    public TextMeshProUGUI healthText;      // 체력 숫자 TMP
+
     [Header("체력 설정")]
     [SerializeField] private int maxHealth = 100;
     private int currentHealth;
@@ -15,7 +21,7 @@ public class PlayerDamage : MonoBehaviour
 
     private bool isInvincible = false;
 
-    // 컴포넌트 참조
+    // 컴포넌트
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private PlayerController playerController;
@@ -31,27 +37,40 @@ public class PlayerDamage : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerController = GetComponent<PlayerController>();
 
-        Debug.Log($"게임 시작! 산타 체력: {currentHealth}");
+        // 체력 UI 초기화
+        if (healthBar != null)
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+        }
+
+        if (healthText != null)
+        {
+            healthText.text = currentHealth + " / " + maxHealth;
+        }
     }
 
-    // 데미지 받기
+    // 데미지 처리
     public void TakeDamage(int damage, Vector2 damageSourcePosition)
     {
         if (isInvincible || currentHealth <= 0) return;
 
         currentHealth -= damage;
-        Debug.Log($"데미지! HP: {currentHealth}/{maxHealth}");
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        // HP UI 갱신 (깜빡임 없음)
+        if (healthBar != null)
+            healthBar.value = currentHealth;
+
+        if (healthText != null)
+            healthText.text = currentHealth + " / " + maxHealth;
 
         StartCoroutine(KnockbackRoutine(damageSourcePosition));
 
         if (currentHealth <= 0)
-        {
-            Die();    // ★ 죽음 처리 함수 호출
-        }
+            Die();
         else
-        {
-            StartCoroutine(InvincibilityRoutine());
-        }
+            StartCoroutine(InvincibilityRoutine()); // 플레이어만 깜빡임
     }
 
     public void TakeDamage(int damage)
@@ -59,7 +78,7 @@ public class PlayerDamage : MonoBehaviour
         TakeDamage(damage, transform.position);
     }
 
-    // 넉백 처리
+    // 넉백
     IEnumerator KnockbackRoutine(Vector2 sourcePos)
     {
         if (playerController != null)
@@ -77,7 +96,7 @@ public class PlayerDamage : MonoBehaviour
             playerController.enabled = true;
     }
 
-    // 무적 깜박임
+    // 플레이어 깜빡임 (UI는 깜빡이지 않음)
     IEnumerator InvincibilityRoutine()
     {
         isInvincible = true;
@@ -100,13 +119,10 @@ public class PlayerDamage : MonoBehaviour
         isInvincible = false;
     }
 
-    // ★ 죽음 처리
     void Die()
     {
-        Debug.Log("산타 사망!");
         rb.linearVelocity = Vector2.zero;
 
-        // ★ 최신 함수 사용: FindFirstObjectByType
         var uiManager = FindFirstObjectByType<UIGameManager>();
         if (uiManager != null)
         {
@@ -121,7 +137,6 @@ public class PlayerDamage : MonoBehaviour
         {
             string enemyName = collision.gameObject.name;
             int dmg = DamageManager.Instance.GetDamageByName(enemyName);
-
             TakeDamage(dmg, collision.transform.position);
         }
     }
@@ -133,20 +148,13 @@ public class PlayerDamage : MonoBehaviour
         {
             string obstacleName = collision.gameObject.name;
             int dmg = DamageManager.Instance.GetDamageByName(obstacleName);
-
             TakeDamage(dmg, collision.transform.position);
         }
     }
 
-    // 낙사 처리
     void Update()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
         if (transform.position.y < deathY && rb.linearVelocity.y < -8f)
-        {
-            Debug.Log("낙사로 사망!");
-            Die();   // ★ 낙사도 동일한 처리
-        }
+            Die();
     }
 }
