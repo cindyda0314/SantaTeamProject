@@ -26,8 +26,15 @@ public class PlayerDamage : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private PlayerController playerController;
 
+
+    // 추가: 사운드 컴포넌트
+    private PlayerSound playerSound;
+
     [Header("낙사 설정")]
     public float deathY = -10f;
+
+    // 추가: 이미 죽었는지 체크 (여러 번 Die() 호출 방지)
+    private bool isDead = false;
 
     void Start()
     {
@@ -36,6 +43,7 @@ public class PlayerDamage : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerController = GetComponent<PlayerController>();
+        playerSound = GetComponent<PlayerSound>();   // PlayerSound 가져오기
 
         // 체력 UI 초기화
         if (healthBar != null)
@@ -58,7 +66,7 @@ public class PlayerDamage : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
-        // HP UI 갱신 (깜빡임 없음)
+        // HP UI 갱신
         if (healthBar != null)
             healthBar.value = currentHealth;
 
@@ -70,7 +78,7 @@ public class PlayerDamage : MonoBehaviour
         if (currentHealth <= 0)
             Die();
         else
-            StartCoroutine(InvincibilityRoutine()); // 플레이어만 깜빡임
+            StartCoroutine(InvincibilityRoutine());
     }
 
     public void TakeDamage(int damage)
@@ -96,7 +104,7 @@ public class PlayerDamage : MonoBehaviour
             playerController.enabled = true;
     }
 
-    // 플레이어 깜빡임 (UI는 깜빡이지 않음)
+    // 플레이어 깜빡임
     IEnumerator InvincibilityRoutine()
     {
         isInvincible = true;
@@ -121,7 +129,14 @@ public class PlayerDamage : MonoBehaviour
 
     void Die()
     {
+        if (isDead) return;              // 이미 죽음 처리했으면 다시 실행 안 함
+        isDead = true;
+
         rb.linearVelocity = Vector2.zero;
+
+        // 🔊 죽음 효과음 재생
+        if (playerSound != null)
+            playerSound.PlayDeath();
 
         var uiManager = FindFirstObjectByType<UIGameManager>();
         if (uiManager != null)
@@ -149,12 +164,16 @@ public class PlayerDamage : MonoBehaviour
             string obstacleName = collision.gameObject.name;
             int dmg = DamageManager.Instance.GetDamageByName(obstacleName);
             TakeDamage(dmg, collision.transform.position);
+
+            if (playerSound != null)
+            playerSound.ObstaclesDump();
         }
     }
 
     void Update()
     {
-        if (transform.position.y < deathY && rb.linearVelocity.y < -8f)
+        // 낙사 처리
+        if (!isDead && transform.position.y < deathY && rb.linearVelocity.y < -8f)
             Die();
     }
 }

@@ -21,14 +21,20 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = false;
     private int jumpCount = 0;
 
-    // ⭐ 점프 입력 버퍼(절대 씹히지 않음)
+    // 점프 입력 버퍼
     private bool jumpQueued = false;
+
+    // 사운드 스크립트
+    private PlayerSound playerSound;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 같은 오브젝트에 붙어 있는 PlayerSound 찾기
+        playerSound = GetComponent<PlayerSound>();
     }
 
     void Update()
@@ -44,7 +50,7 @@ public class PlayerController : MonoBehaviour
         if (moveX < 0) spriteRenderer.flipX = true;
         if (moveX > 0) spriteRenderer.flipX = false;
 
-        // ⭐ 점프 입력 저장(버퍼)
+        // 점프 입력 저장
         if (Input.GetKeyDown(KeyCode.Space))
             jumpQueued = true;
 
@@ -62,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // ⭐ FixedUpdate에서 점프 처리 → 입력 안 씹힘
+        // 점프 처리
         if (jumpQueued)
         {
             // 1단 점프
@@ -87,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
         float force = jumpForce;
 
-        // 2단 점프는 살짝 높게(너 기존 코드 유지)
+        // 2단 점프는 살짝 높게
         if (jumpCount == 2)
             force = jumpForce * 1.3f;
 
@@ -95,6 +101,53 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, force);
 
         animator.SetBool("isJumping", true);
+
+        // 점프 사운드
+        if (playerSound != null)
+            playerSound.PlayJump();
+    }
+
+    // ---- 충돌 처리 + 사운드 ----
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        ProcessHit(collision.gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        ProcessHit(other.gameObject);
+    }
+
+    void ProcessHit(GameObject other)
+    {
+        if (playerSound == null) return;
+
+        // 적
+        if (other.CompareTag("Enemy"))
+        {
+            playerSound.EnemyDump();
+        }
+        // 장애물
+        else if (other.CompareTag("Obstacle"))
+        {
+            playerSound.ObstaclesDump();
+        }
+        // 오너먼트 아이템
+        else if (other.CompareTag("Ornament"))
+        {
+            playerSound.ItemOrnament();
+        }
+        // 크리스마스 양말 아이템
+        else if (other.CompareTag("Christmasstocking"))
+        {
+            playerSound.ItemChristmasstocking();
+        }
+        // 리스 아이템
+        else if (other.CompareTag("Wreath"))
+        {
+            playerSound.ItemWreath();
+        }
     }
 
     // Jump 애니메이션 끝 이벤트
