@@ -54,8 +54,11 @@ TagManager:
   - name: Characters
     uniqueID: 3368406565
     locked: 0
-  - name: Effects
+  - name: Item
     uniqueID: 2468731615
+    locked: 0
+  - name: UI
+    uniqueID: 3528384493
     locked: 0
   m_RenderingLayers:
   - Default
