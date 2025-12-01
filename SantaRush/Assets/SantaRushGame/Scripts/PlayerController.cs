@@ -134,17 +134,17 @@ public class PlayerController : MonoBehaviour
             playerSound.ObstaclesDump();
         }
         // 오너먼트 아이템
-        else if (other.CompareTag("Ornament"))
+        else if (other.CompareTag("Item"))
         {
             playerSound.ItemOrnament();
         }
         // 크리스마스 양말 아이템
-        else if (other.CompareTag("Christmasstocking"))
+        else if (other.CompareTag("Item"))
         {
             playerSound.ItemChristmasstocking();
         }
         // 리스 아이템
-        else if (other.CompareTag("Wreath"))
+        else if (other.CompareTag("Item"))
         {
             playerSound.ItemWreath();
         }
