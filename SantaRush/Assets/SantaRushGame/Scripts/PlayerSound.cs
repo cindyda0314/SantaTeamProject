@@ -4,18 +4,15 @@ public class PlayerSound : MonoBehaviour
 {
     public AudioSource audioSource;
 
-
     public AudioClip jumpClip;
     public AudioClip EnemyDumpClip;
     public AudioClip ObstaclesDumpClip;
 
-    public AudioClip OrnamentClip;  
-    public AudioClip ChristmasstockingClip;       
+    public AudioClip OrnamentClip;
+    public AudioClip ChristmasstockingClip;
     public AudioClip WreathClip;
 
     public AudioClip DeathClip;
-
-
 
     public void PlayJump()
     {
@@ -58,6 +55,4 @@ public class PlayerSound : MonoBehaviour
         if (DeathClip != null)
             audioSource.PlayOneShot(DeathClip);
     }
-
 }
-
