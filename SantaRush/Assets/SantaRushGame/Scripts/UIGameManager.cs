@@ -11,18 +11,19 @@ public class UIGameManager : MonoBehaviour
 
     void Start()
     {
-        // ⭐ Retry로 들어온 경우: titleScreen을 보여주지 않음
+        // Retry로 들어온 경우
         if (isRetry)
         {
-            titleScreenPanel.SetActive(false);
-            gameOverPanel.SetActive(false);
+            if (titleScreenPanel != null) titleScreenPanel.SetActive(false);
+            if (gameOverPanel != null) gameOverPanel.SetActive(false);
             Time.timeScale = 1f;
             return;
         }
 
-        // ⭐ 게임 처음 실행한 경우만 타이틀 표시
-        titleScreenPanel.SetActive(true);
-        gameOverPanel.SetActive(false);
+        // 처음 실행한 경우
+        if (titleScreenPanel != null) titleScreenPanel.SetActive(true);
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
+
         Time.timeScale = 0f;
     }
 
@@ -36,7 +37,10 @@ public class UIGameManager : MonoBehaviour
     // 게임오버 패널 표시
     public void ShowGameOver()
     {
-        gameOverPanel.SetActive(true);
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(true);
+        }
         Time.timeScale = 0f;
     }
 
@@ -48,3 +52,4 @@ public class UIGameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
+
