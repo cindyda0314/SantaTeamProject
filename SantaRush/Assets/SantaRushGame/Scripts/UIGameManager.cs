@@ -51,5 +51,14 @@ public class UIGameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    //exit눌렀을 때 main으로 이동
+    public void GoMain()
+    {
+        isRetry = false;   // 처음 화면처럼 보이게 하고 싶다면 false 유지
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("main1");   // ← 네가 연결하려는 씬 이름
+    }
 }
+
 
