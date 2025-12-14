@@ -8,6 +8,7 @@ public class UIGameManager : MonoBehaviour
     [Header("UI 패널")]
     public GameObject titleScreenPanel;   // 시작 화면
     public GameObject gameOverPanel;      // 게임 오버 화면
+    public GameObject healthBar;   // 체력바
 
     void Start()
     {
@@ -16,6 +17,7 @@ public class UIGameManager : MonoBehaviour
         {
             if (titleScreenPanel != null) titleScreenPanel.SetActive(false);
             if (gameOverPanel != null) gameOverPanel.SetActive(false);
+            if (healthBar != null) healthBar.SetActive(true); //체력바
             Time.timeScale = 1f;
             return;
         }
@@ -23,6 +25,7 @@ public class UIGameManager : MonoBehaviour
         // 처음 실행한 경우
         if (titleScreenPanel != null) titleScreenPanel.SetActive(true);
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
+        if (healthBar != null) healthBar.SetActive(false);  //체력바
 
         Time.timeScale = 0f;
     }
@@ -31,6 +34,7 @@ public class UIGameManager : MonoBehaviour
     public void StartGame()
     {
         titleScreenPanel.SetActive(false);
+        if (healthBar != null) healthBar.SetActive(true); //체력바
         Time.timeScale = 1f;
     }
 

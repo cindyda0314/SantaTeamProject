@@ -8346,7 +8346,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2908683908327544083, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
   m_PrefabInstance: {fileID: 1883900690}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1152206226}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
@@ -8662,6 +8662,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7546704566035469479, guid: 6ad86fb96583d644490fe9c9eb58ca3e, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1152206226}
     - target: {fileID: 7546704566035469479, guid: 6ad86fb96583d644490fe9c9eb58ca3e, type: 3}
       propertyPath: gameOverPanel
       value: 
@@ -9855,6 +9859,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1152206226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8651286704222376066, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
+  m_PrefabInstance: {fileID: 1883900690}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1182167719
 GameObject:
   m_ObjectHideFlags: 0
@@ -10429,7 +10438,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 311067264647921528, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 392417646928209963, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
       propertyPath: m_Pivot.x
@@ -10518,6 +10527,18 @@ PrefabInstance:
     - target: {fileID: 1369720636071263131, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RetryGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048330459209810636, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123550186013178597, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
+      propertyPath: m_text
+      value: Stage2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123550186013178597, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
+      propertyPath: m_margin.z
+      value: 25.011108
       objectReference: {fileID: 0}
     - target: {fileID: 4140959580354131591, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -11859,11 +11880,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2369537273178409660, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2369537273178409660, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5229737396908558432, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_UiScaleMode
@@ -11881,6 +11902,10 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 173802014}
+    - target: {fileID: 8651286704222376066, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

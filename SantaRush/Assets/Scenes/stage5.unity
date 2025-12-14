@@ -5932,6 +5932,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7546704566035469479, guid: 6ad86fb96583d644490fe9c9eb58ca3e, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1576543565}
+    - target: {fileID: 7546704566035469479, guid: 6ad86fb96583d644490fe9c9eb58ca3e, type: 3}
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 643537053}
@@ -10681,11 +10685,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2369537273178409660, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2369537273178409660, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7166638855955616601, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_Name
@@ -10699,6 +10703,10 @@ PrefabInstance:
       propertyPath: healthText
       value: 
       objectReference: {fileID: 1576543563}
+    - target: {fileID: 8651286704222376066, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10720,12 +10728,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2908683908327544083, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
   m_PrefabInstance: {fileID: 1576543562}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1576543565}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1576543565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8651286704222376066, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
+  m_PrefabInstance: {fileID: 1576543562}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1580158483
 GameObject:
   m_ObjectHideFlags: 0
@@ -39963,6 +39976,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 311067264647921528, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 392417646928209963, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -40050,6 +40067,14 @@ PrefabInstance:
     - target: {fileID: 1369720636071263131, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RetryGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2048330459209810636, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123550186013178597, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
+      propertyPath: m_text
+      value: Stage4
       objectReference: {fileID: 0}
     - target: {fileID: 4140959580354131591, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
