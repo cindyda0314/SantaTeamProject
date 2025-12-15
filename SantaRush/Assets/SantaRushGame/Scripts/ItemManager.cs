@@ -51,4 +51,12 @@ public class ItemManager : MonoBehaviour
         // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Debug.Log("❌ 미션 실패!");
     }
+
+    public bool IsAllItemsCollected()
+    {
+
+    return collectedItemCount >= totalItemCount;
+    
+    }
+
 }

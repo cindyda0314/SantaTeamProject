@@ -63,6 +63,17 @@ public class UIGameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("main1");   // ← 네가 연결하려는 씬 이름
     }
+
+
+    // 12.16 씬 연결 추가
+    public GameObject titlePanel;
+
+    public void StartStage()
+    {
+        titlePanel.SetActive(false);
+    }
+    // 12.16 씬 연결 추가
+
 }
 
 
