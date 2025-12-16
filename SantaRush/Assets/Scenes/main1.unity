@@ -418,25 +418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4febc3a88c7276246be0c99f115aa39a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadePanel: {fileID: 445915555}
-  fadeTime: 1
-  sceneFlow:
-  - main1
-  - main2
-  - story1
-  - story1-2
-  - stage1
-  - story2
-  - stage2
-  - story3
-  - stage3
-  - story4
-  - stage5
-  - story5
-  currentIndex: 0
-  autoGoNext: 0
-  autoDelay: 3
-  autoSetIndexBySceneName: 1
 --- !u!4 &338133054
 Transform:
   m_ObjectHideFlags: 0
