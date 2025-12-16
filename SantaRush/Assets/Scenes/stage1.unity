@@ -4675,6 +4675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1534356006}
   - component: {fileID: 1534356005}
+  - component: {fileID: 1534356007}
   m_Layer: 0
   m_Name: CutsceneController
   m_TagString: Untagged
@@ -4694,25 +4695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4febc3a88c7276246be0c99f115aa39a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadePanel: {fileID: 933788705}
-  fadeTime: 1
-  sceneFlow:
-  - main1
-  - main2
-  - story1
-  - story1-2
-  - stage1
-  - story2
-  - stage2
-  - story3
-  - stage3
-  - story4
-  - stage5
-  - story5
-  currentIndex: 0
-  autoGoNext: 0
-  autoDelay: 3
-  autoSetIndexBySceneName: 1
 --- !u!4 &1534356006
 Transform:
   m_ObjectHideFlags: 0
@@ -4728,6 +4710,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1534356007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534356004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f128873300de942bcae38d3023554b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadePanel: {fileID: 933788705}
+  fadeTime: 1
+  sceneFlow: []
+  currentIndex: 0
+  autoGoNext: 0
+  autoDelay: 3
+  autoSetIndexBySceneName: 1
 --- !u!114 &1540040579 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7546704566035469479, guid: 6ad86fb96583d644490fe9c9eb58ca3e, type: 3}
