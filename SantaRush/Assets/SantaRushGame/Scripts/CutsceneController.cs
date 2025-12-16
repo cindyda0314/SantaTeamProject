@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,134 +7,208 @@ using DG.Tweening;
 
 public class CutsceneController : MonoBehaviour
 {
-    [Header("페이드용 패널 (Canvas 안의 Image)")]
+    public static CutsceneController Instance { get; private set; }
+
+    [Header("페이드 패널 이름(씬마다 동일하게)")]
+    public string fadePanelObjectName = "FadePanel";
+
+    [Header("페이드용 패널(Image) - 씬마다 자동 재연결")]
     public Image fadePanel;
 
     [Header("페이드 시간(초)")]
     public float fadeTime = 1f;
 
-    [Header("(stage → story → stage → story ...)")]
-    public List<string> sceneFlow = new List<string>();
+    [Header("씬 진행 순서 (main → story → stage → story ...)")]
+    public List<string> sceneFlow = new List<string>()
+    {
+        "main1",
+        "main2",
+        "story1",
+        "story1-2",
+        "stage1",
+        "story2",
+        "stage2",
+        "story3",
+        "stage3",
+        "story4",
+        "stage5",
+        "story5"
+    };
 
-    [Header("현재 씬 인덱스 (자동 설정을 권장)")]
-    public int currentIndex = 0;
+    [Header("스토리 씬 목록(자동 진행용)")]
+    public List<string> storyScenes = new List<string>()
+    {
+        "story1",
+        "story1-2",
+        "story2",
+        "story3",
+        "story4",
+        "story5"
+    };
 
-    [Header("자동으로 다음 씬으로 갈지? (스토리 씬용)")]
-    public bool autoGoNext = false;
+    [Header("스토리 자동 전환 딜레이(초) - ImageSequence를 안 쓸 때만")]
+    public float autoDelay = 0f;
 
-    [Header("자동 전환 딜레이(초)")]
-    public float autoDelay = 3f;
-
-    [Header("자동으로 currentIndex를 현재 씬 이름으로 맞출지")]
+    [Header("현재 씬 인덱스 자동 맞춤")]
     public bool autoSetIndexBySceneName = true;
 
+    private int currentIndex = 0;
     private bool isLoading = false;
+
+    void Awake()
+    {
+        // ✅ 싱글톤 + 중복 제거
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
+        // 씬 전환 시에도 파괴되지 않고 유지
+        DontDestroyOnLoad(gameObject);
+
+        // 씬 로드 이벤트 등록
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        // 씬 로드 이벤트 해제
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     void Start()
     {
-        // 1) currentIndex 자동 설정(추천)
+        // Start 시에 바로 Setup 하지 않고 1프레임 딜레이를 줍니다.
+        // GameObject.Find가 씬 로드 직후 실패하는 것을 방지합니다.
+        StartCoroutine(SetupAfterDelay());
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 씬 로드 완료 후 1프레임 딜레이를 줍니다.
+        StartCoroutine(SetupAfterDelay());
+    }
+    
+    private IEnumerator SetupAfterDelay()
+    {
+        yield return null; // 1프레임 대기
+        SetupForCurrentScene();
+    }
+
+    private void SetupForCurrentScene()
+    {
+        isLoading = false;
+
+        // 1) 현재 씬 인덱스 자동 설정
         if (autoSetIndexBySceneName && sceneFlow != null && sceneFlow.Count > 0)
         {
             string now = SceneManager.GetActiveScene().name;
             int idx = sceneFlow.IndexOf(now);
             if (idx >= 0) currentIndex = idx;
-            else Debug.LogWarning($"[CutsceneController] sceneFlow에 현재 씬({now})이 없습니다. currentIndex={currentIndex} 그대로 사용합니다.");
+            else Debug.LogWarning($"[CutsceneController] sceneFlow에 현재 씬({now})이 없습니다. 씬 전환 시 에러가 발생할 수 있습니다.");
         }
 
-        // 2) 페이드 인(검정 → 투명)
-        if (fadePanel != null)
+        // 2) FadePanel 자동 연결 (이전 답변에서 설명드렸듯이, 여기서 경고가 뜬다면 씬에 'FadePanel'이 없거나 비활성화된 것입니다.)
+        TryAutoFindFadePanel();
+
+        // 3) 검은 화면 고정 방지: 항상 씬 진입 시 페이드 인
+        FadeIn();
+
+        // 4) (선택) 스토리 자동 넘김
+        string nowScene = SceneManager.GetActiveScene().name;
+        if (autoDelay > 0f && storyScenes.Contains(nowScene))
         {
-            fadePanel.raycastTarget = true; // 전환 중 입력 막기(선택)
-            fadePanel.color = new Color(0, 0, 0, 1f);
-            fadePanel.DOFade(0f, fadeTime).OnComplete(() =>
-            {
-                // 평상시엔 입력 막지 않게
-                fadePanel.raycastTarget = false;
-            });
+            CancelInvoke(nameof(LoadNextScene));
+            Invoke(nameof(LoadNextScene), autoDelay);
         }
         else
         {
-            Debug.LogWarning("[CutsceneController] fadePanel이 연결되지 않았습니다. 페이드 없이 씬 전환됩니다.");
-        }
-
-        // 3) 스토리 씬 자동 전환
-        if (autoGoNext)
-        {
-            Invoke(nameof(LoadNextScene), autoDelay);
+            CancelInvoke(nameof(LoadNextScene));
         }
     }
 
-    /// <summary>
-    /// 원하는 씬으로 이동(페이드 아웃 후 로드)
-    /// </summary>
-    public void LoadScene(string sceneName)
+    private void TryAutoFindFadePanel()
+    {
+        // 씬에 FadePanel이 있으면 그걸 잡는다 (Canvas 안에 Image 하나)
+        var go = GameObject.Find(fadePanelObjectName);
+        if (go != null)
+        {
+            var img = go.GetComponent<Image>();
+            if (img != null)
+            {
+                fadePanel = img;
+                return;
+            }
+        }
+
+        // 못 찾았으면 경고만 (없어도 씬 전환은 됨)
+        fadePanel = null;
+        Debug.LogWarning($"[CutsceneController] {fadePanelObjectName}을(를) 찾지 못했습니다. (페이드 없이 전환될 수 있음)");
+    }
+
+    private void FadeIn()
+    {
+        if (fadePanel == null) return;
+
+        fadePanel.DOKill(true);
+        fadePanel.raycastTarget = false; // 마우스 클릭 방지 해제
+
+        // ✅ 씬 로드 후 화면이 완전히 검게 되지 않도록, 시작 알파 1 → 0으로 확실히 내림 (Fade In)
+        fadePanel.color = new Color(0, 0, 0, 1f);
+        fadePanel.DOFade(0f, fadeTime).SetUpdate(true);
+    }
+
+    private void FadeOutAndLoad(string sceneName)
     {
         if (isLoading) return;
+        isLoading = true;
+
         if (string.IsNullOrWhiteSpace(sceneName))
         {
-            Debug.LogError("[CutsceneController] LoadScene 호출됐지만 sceneName이 비어있습니다.");
+            Debug.LogError("[CutsceneController] 이동할 씬 이름이 비어있습니다.");
+            isLoading = false;
             return;
         }
 
-        isLoading = true;
-
-        // 페이드 패널이 없으면 즉시 이동
+        // FadePanel이 없다면 페이드 없이 바로 로드
         if (fadePanel == null)
         {
             SceneManager.LoadScene(sceneName);
             return;
         }
 
-        fadePanel.raycastTarget = true;
+        fadePanel.DOKill(true);
+        fadePanel.raycastTarget = true; // 페이드 중 사용자 입력 방지
 
-        // 투명 → 검정
+        // ✅ 알파 0 → 1로 올림 (Fade Out) 후 씬 로드
         fadePanel.DOFade(1f, fadeTime)
-            .OnComplete(() =>
-            {
-                SceneManager.LoadScene(sceneName);
-            });
+            .SetUpdate(true)
+            .OnComplete(() => SceneManager.LoadScene(sceneName));
     }
 
-    /// <summary>
-    /// sceneFlow 기준으로 다음 씬으로 이동
-    /// </summary>
+    public void LoadScene(string sceneName)
+    {
+        FadeOutAndLoad(sceneName);
+    }
+
     public void LoadNextScene()
     {
-        if (isLoading) return;
-
-        // ✅ NullReference 방지: sceneFlow 비어있으면 여기서 끝
         if (sceneFlow == null || sceneFlow.Count == 0)
         {
-            Debug.LogError("[CutsceneController] sceneFlow가 비어있습니다! Inspector에서 Scene Flow를 채워주세요.");
+            Debug.LogError("[CutsceneController] sceneFlow가 비어있습니다! Inspector/코드에서 채워주세요.");
             return;
         }
 
         int nextIndex = currentIndex + 1;
-
-        // 마지막이면 더 이상 없음
         if (nextIndex < 0 || nextIndex >= sceneFlow.Count)
         {
-            Debug.LogError($"[CutsceneController] 다음 씬이 없습니다. currentIndex={currentIndex}, sceneFlow.Count={sceneFlow.Count}");
+            Debug.LogError($"[CutsceneController] 다음 씬이 없습니다. currentIndex={currentIndex}, count={sceneFlow.Count}");
             return;
         }
 
         string nextScene = sceneFlow[nextIndex];
-
-        if (string.IsNullOrWhiteSpace(nextScene))
-        {
-            Debug.LogError($"[CutsceneController] sceneFlow[{nextIndex}]가 비어있습니다. 씬 이름을 정확히 입력하세요.");
-            return;
-        }
-
-        LoadScene(nextScene);
-    }
-
-    /// <summary>
-    /// (선택) 특정 인덱스로 강제 이동하고 싶을 때
-    /// </summary>
-    public void SetIndex(int index)
-    {
-        currentIndex = index;
+        FadeOutAndLoad(nextScene);
     }
 }
-

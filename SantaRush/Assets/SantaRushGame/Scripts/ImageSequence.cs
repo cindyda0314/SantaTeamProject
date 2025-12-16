@@ -3,12 +3,15 @@ using UnityEngine.UI;
 
 public class ImageSequence : MonoBehaviour
 {
-    public Image display;      
-    public Sprite[] images;    
-    private int index = 0;
+    public Image display;
+    public Sprite[] images;
 
-    public float delay = 2f;   // 이미지 전환 시간 (초) ⭐ 추가
-    private float timer = 0f;  // 타이머 ⭐ 추가
+    public float delay = 2f;    // 이미지 전환 간격
+    private int index = 0;
+    private float timer = 0f;
+    // 📌 컴파일 오류 해결: finished 변수 선언 추가
+    private bool finished = false; 
+
 
     void Start()
     {
@@ -18,21 +21,35 @@ public class ImageSequence : MonoBehaviour
 
     void Update()
     {
+        if (finished) return; 
+
         timer += Time.deltaTime;
 
-        if (timer >= delay) // 일정 시간 지나면 자동 전환
+        if (timer >= delay)
         {
             timer = 0f;
             index++;
 
             if (index < images.Length)
             {
+                // 다음 이미지 표시
                 display.sprite = images[index];
             }
             else
             {
-                Debug.Log("컷신 끝");
-                // 여기서 다음 씬 이동하거나 화면 닫기 가능
+                // 모든 이미지 표시 완료
+                finished = true;
+                Debug.Log("🎬 컷신 끝 → CutsceneController 호출");
+
+                // 📌 다음 씬 로드 요청
+                if (CutsceneController.Instance != null)
+                {
+                    CutsceneController.Instance.LoadNextScene();
+                }
+                else
+                {
+                    Debug.LogError("[ImageSequence] CutsceneController 인스턴스를 찾을 수 없어 씬 전환 실패.");
+                }
             }
         }
     }
