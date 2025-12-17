@@ -5,8 +5,8 @@ public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
 
-    private int totalItemCount = 0;      // 씬 전체 아이템 수
-    private int collectedItemCount = 0;  // 플레이어가 먹은 개수
+    public int totalItemCount { get; private set; } // 씬 내 총 아이템 개수
+    public int collectedItemCount { get; private set; }// 수집한 아이템 개수
 
     void Awake()
     {
@@ -60,3 +60,5 @@ public class ItemManager : MonoBehaviour
     }
 
 }
+
+
