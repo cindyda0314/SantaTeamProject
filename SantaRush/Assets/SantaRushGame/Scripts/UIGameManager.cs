@@ -9,7 +9,6 @@ public class UIGameManager : MonoBehaviour
     public GameObject titleScreenPanel;   // 시작 화면
     public GameObject gameOverPanel;      // 게임 오버 화면
     public GameObject healthBar;   // 체력바
-    public GameObject itemUI; // 아이템 UI
 
     void Start()
     {
@@ -19,7 +18,7 @@ public class UIGameManager : MonoBehaviour
             if (titleScreenPanel != null) titleScreenPanel.SetActive(false);
             if (gameOverPanel != null) gameOverPanel.SetActive(false);
             if (healthBar != null) healthBar.SetActive(true); //체력바
-            itemUI?.SetActive(true);  // 아이템 UI 활성화
+       
             Time.timeScale = 1f;
             return;
         }
@@ -28,7 +27,7 @@ public class UIGameManager : MonoBehaviour
         if (titleScreenPanel != null) titleScreenPanel.SetActive(true);
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
         if (healthBar != null) healthBar.SetActive(false);  //체력바
-        itemUI?.SetActive(false); // 아이템 UI 비활성화
+       
 
         Time.timeScale = 0f;
     }
@@ -38,7 +37,7 @@ public class UIGameManager : MonoBehaviour
     {
         titleScreenPanel.SetActive(false);
         if (healthBar != null) healthBar.SetActive(true); //체력바
-         itemUI?.SetActive(true); // 아이템 UI 활성화
+    
         Time.timeScale = 1f;
         Debug.Log("CLICK");
     }
