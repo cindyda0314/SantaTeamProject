@@ -15744,9 +15744,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8355546806220573825, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8355546806220573825, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1540040579}
+    - target: {fileID: 8355546806220573825, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 7762f6cb440180044a73f9802f41fc1a, type: 3}
     - target: {fileID: 8355546806220573825, guid: ffe6d10963521844bbdd0ac0db3faed7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StartGame

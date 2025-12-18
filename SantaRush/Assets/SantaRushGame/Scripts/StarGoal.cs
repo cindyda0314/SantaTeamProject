@@ -33,6 +33,10 @@ public class StarGoal : MonoBehaviour
         }
 
         cleared = true;
+
+        // ✅ 별 먹는 순간 배경음 즉시 종료
+        BGMManager.Instance?.StopBGMNow();
+
         gameObject.SetActive(false);
 
         cutscene?.LoadNextScene();
@@ -40,8 +44,6 @@ public class StarGoal : MonoBehaviour
 
     private string GetCountDebug()
     {
-        // ItemManager에 프로퍼티가 없어서, 여기서는 로그용으로만 간단히 표기
-        // (원하면 ItemManager에 TotalCount/CollectedCount 프로퍼티도 추가해줄게)
         return "check passed";
     }
 }

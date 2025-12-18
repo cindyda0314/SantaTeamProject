@@ -13554,11 +13554,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2369537273178409660, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2369537273178409660, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7166638855955616601, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_Name
@@ -13566,7 +13566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7166638855955616601, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7270657884918867550, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: healthBar
@@ -13578,7 +13578,7 @@ PrefabInstance:
       objectReference: {fileID: 1576543563}
     - target: {fileID: 8651286704222376066, guid: 64490ecc1d4685842b8801bfe9f77f03, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13627,7 +13627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a501707146f66014382d0cfa4abefbed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemText: {fileID: 0}
 --- !u!1 &1580158483
 GameObject:
   m_ObjectHideFlags: 0
