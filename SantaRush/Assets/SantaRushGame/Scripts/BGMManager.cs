@@ -10,25 +10,17 @@ public class BGMManager : MonoBehaviour
 
     [Header("BGM Clips")]
     public AudioClip openingBGM; // main1, story1, story1-2
-    public AudioClip scene1BGM;  // stage1
-    public AudioClip scene2BGM;  // stage2
-    public AudioClip scene3BGM;  // stage3
-    public AudioClip scene5BGM;  // stage5
     public AudioClip endingBGM;  // story5, main2
 
     [Header("Volumes")]
     [Range(0f, 1f)] public float openingVol = 0.35f;
-    [Range(0f, 1f)] public float scene1Vol  = 0.30f;
-    [Range(0f, 1f)] public float scene2Vol  = 0.30f;
-    [Range(0f, 1f)] public float scene3Vol  = 0.30f;
-    [Range(0f, 1f)] public float scene5Vol  = 0.30f;
     [Range(0f, 1f)] public float endingVol  = 0.35f;
 
-    // "Start 누르면 재생"용 준비 상태
+    // 준비된 BGM 상태
     private AudioClip preparedClip = null;
     private float preparedVol = 0.3f;
 
-    // ✅ 씬 로드시 자동 재생할지 여부
+    // 씬 로드시 자동 재생 여부
     private bool autoPlayOnLoad = false;
 
     void Awake()
@@ -75,18 +67,18 @@ public class BGMManager : MonoBehaviour
             return;
         }
 
-        // 자동재생 씬이면: 같은 곡이면 유지, 아니면 재생
+        // 자동재생 씬이면 바로 재생
         if (autoPlayOnLoad)
         {
             PlayPreparedBGM();
             return;
         }
 
-        // 자동재생 아니면(= Start 버튼에서만 재생): 씬 들어올 때는 일단 정지
+        // Start 버튼에서만 재생하는 씬
         StopBGMNow();
     }
 
-    // 씬별로 "재생할 곡" + "자동재생 여부" 준비
+    // 씬별 규칙 정의
     private void PrepareBGMForScene(string sceneName)
     {
         preparedClip = null;
@@ -102,7 +94,7 @@ public class BGMManager : MonoBehaviour
                 autoPlayOnLoad = false;
                 break;
 
-            // ✅ story1, story1-2: 오프닝이 계속 이어지도록 자동재생(유지)
+            // ✅ story1 / story1-2: 오프닝 유지 (자동재생)
             case "story1":
             case "story1-2":
                 preparedClip = openingBGM;
@@ -110,34 +102,16 @@ public class BGMManager : MonoBehaviour
                 autoPlayOnLoad = true;
                 break;
 
-            // (필요하면 story1도 Start 버튼이 있다면 autoPlayOnLoad=false로 바꿀 수 있음)
-
-            // ✅ stage: Start 버튼 누를 때만 재생
+            // ✅ stage는 전부 무음
             case "stage1":
-                preparedClip = scene1BGM;
-                preparedVol = scene1Vol;
-                autoPlayOnLoad = false;
-                break;
-
             case "stage2":
-                preparedClip = scene2BGM;
-                preparedVol = scene2Vol;
-                autoPlayOnLoad = false;
-                break;
-
             case "stage3":
-                preparedClip = scene3BGM;
-                preparedVol = scene3Vol;
-                autoPlayOnLoad = false;
-                break;
-
             case "stage5":
-                preparedClip = scene5BGM;
-                preparedVol = scene5Vol;
+                preparedClip = null;
                 autoPlayOnLoad = false;
                 break;
 
-            // ✅ 엔딩(스토리5/메인2): 자동재생이 자연스러움
+            // ✅ 엔딩 자동재생
             case "story5":
             case "main2":
                 preparedClip = endingBGM;
@@ -145,7 +119,7 @@ public class BGMManager : MonoBehaviour
                 autoPlayOnLoad = true;
                 break;
 
-            // ✅ 무음 씬
+            // ✅ 기타 스토리 무음
             case "story2":
             case "story3":
             case "story4":
@@ -167,7 +141,7 @@ public class BGMManager : MonoBehaviour
             return;
         }
 
-        // ✅ 같은 곡이 이미 재생 중이면 끊지 말고 유지(볼륨만 보정)
+        // 같은 곡이면 유지
         if (audioSource.isPlaying && audioSource.clip == preparedClip)
         {
             audioSource.volume = preparedVol;
