@@ -8,15 +8,26 @@ public class BGMManager : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
 
-    [Header("BGM Clips")]
+    [Header("BGM Clips - Main/Opening/Ending")]
     public AudioClip openingBGM; // main1, story1, story1-2
-    public AudioClip gameBGM;    // stage1~5 + story2~4 (한 곡 계속)
     public AudioClip endingBGM;  // story5, main2
+
+    [Header("BGM Clips - Story (2/3/4 개별)")]
+    public AudioClip story2BGM;
+    public AudioClip story3BGM;
+    public AudioClip story4BGM;
+
+    [Header("BGM Clips - Stage (1/2/3/5 개별)")]
+    public AudioClip stage1BGM;
+    public AudioClip stage2BGM;
+    public AudioClip stage3BGM;
+    public AudioClip stage5BGM;
 
     [Header("Volumes")]
     [Range(0f, 1f)] public float openingVol = 0.35f;
-    [Range(0f, 1f)] public float gameVol    = 0.30f;
     [Range(0f, 1f)] public float endingVol  = 0.35f;
+    [Range(0f, 1f)] public float storyVol   = 0.30f;
+    [Range(0f, 1f)] public float stageVol   = 0.30f;
 
     // 준비된 BGM 상태
     private AudioClip preparedClip = null;
@@ -37,6 +48,7 @@ public class BGMManager : MonoBehaviour
 
             audioSource.loop = true;
             audioSource.playOnAwake = false;
+            audioSource.spatialBlend = 0f; // 2D
         }
         else
         {
@@ -76,7 +88,7 @@ public class BGMManager : MonoBehaviour
             return;
         }
 
-       
+        // Start 버튼에서만 재생하는 씬이면 대기(정지)
         StopBGMNow();
     }
 
@@ -96,7 +108,7 @@ public class BGMManager : MonoBehaviour
                 autoPlayOnLoad = false;
                 break;
 
-            // story1 / story1-2: 오프닝 자동 유지
+            // story1 / story1-2: 오프닝 유지 (자동재생)
             case "story1":
             case "story1-2":
                 preparedClip = openingBGM;
@@ -104,17 +116,48 @@ public class BGMManager : MonoBehaviour
                 autoPlayOnLoad = true;
                 break;
 
-            // story2~story4 + stage1~stage5 : 게임BGM 한 곡 계속
+            // ✅ story2/3/4 각각 다른 BGM
             case "story2":
+                preparedClip = story2BGM;
+                preparedVol = storyVol;
+                autoPlayOnLoad = true;
+                break;
+
             case "story3":
+                preparedClip = story3BGM;
+                preparedVol = storyVol;
+                autoPlayOnLoad = true;
+                break;
+
             case "story4":
+                preparedClip = story4BGM;
+                preparedVol = storyVol;
+                autoPlayOnLoad = true;
+                break;
+
+            // ✅ stage1/2/3/5 각각 다른 BGM
             case "stage1":
+                preparedClip = stage1BGM;
+                preparedVol = stageVol;
+                autoPlayOnLoad = true;
+                break;
+
             case "stage2":
+                preparedClip = stage2BGM;
+                preparedVol = stageVol;
+                autoPlayOnLoad = true;
+                break;
+
             case "stage3":
+                preparedClip = stage3BGM;
+                preparedVol = stageVol;
+                autoPlayOnLoad = true;
+                break;
+
             case "stage5":
-                preparedClip = gameBGM;
-                preparedVol = gameVol;
-                autoPlayOnLoad = true;   // 씬 들어오면 자동 재생/유지
+                preparedClip = stage5BGM;
+                preparedVol = stageVol;
+                autoPlayOnLoad = true;
                 break;
 
             // 엔딩 자동재생
@@ -125,15 +168,15 @@ public class BGMManager : MonoBehaviour
                 autoPlayOnLoad = true;
                 break;
 
+            // 기타 씬은 무음
             default:
-                // 나머지는 무음
                 preparedClip = null;
                 autoPlayOnLoad = false;
                 break;
         }
     }
 
-    // Start 버튼에서 호출 가능 + 자동재생에도 사용
+    // Start 버튼에서 호출 (main1에서 START 누를 때 등)
     public void PlayPreparedBGM()
     {
         if (!audioSource) return;
@@ -144,7 +187,7 @@ public class BGMManager : MonoBehaviour
             return;
         }
 
-        // 같은 곡이면 끊지 않고 유지(Retry/씬전환에도 계속)
+        // ✅ 같은 곡이면 유지 (Retry나 씬 재진입 때 끊김 방지)
         if (audioSource.isPlaying && audioSource.clip == preparedClip)
         {
             audioSource.volume = preparedVol;

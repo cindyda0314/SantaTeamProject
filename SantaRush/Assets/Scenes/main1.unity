@@ -701,11 +701,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 992714206}
   openingBGM: {fileID: 8300000, guid: 7daebfe5e049d7d448ae9ca6454f3b6f, type: 3}
-  gameBGM: {fileID: 8300000, guid: d2942d638850bdd4a9ecd67a5143666c, type: 3}
   endingBGM: {fileID: 8300000, guid: 93a91b5cfadb1364082428f536cbd340, type: 3}
+  story2BGM: {fileID: 8300000, guid: 8e72358f30518234ebf0b4abafe6a27c, type: 3}
+  story3BGM: {fileID: 8300000, guid: 8e72358f30518234ebf0b4abafe6a27c, type: 3}
+  story4BGM: {fileID: 8300000, guid: 8e72358f30518234ebf0b4abafe6a27c, type: 3}
+  stage1BGM: {fileID: 8300000, guid: d2942d638850bdd4a9ecd67a5143666c, type: 3}
+  stage2BGM: {fileID: 8300000, guid: af178700fb4035344ac0bf2693f055b7, type: 3}
+  stage3BGM: {fileID: 8300000, guid: 186fce0f675fb814dbff63b9ad1410e7, type: 3}
+  stage5BGM: {fileID: 8300000, guid: 1d7930c4bf3482e4a8da4edd6cce88df, type: 3}
   openingVol: 0.35
-  gameVol: 0.3
   endingVol: 0.35
+  storyVol: 0.3
+  stageVol: 0.25
 --- !u!82 &992714206
 AudioSource:
   m_ObjectHideFlags: 0
