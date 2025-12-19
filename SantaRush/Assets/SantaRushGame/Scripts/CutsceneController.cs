@@ -57,7 +57,7 @@ public class CutsceneController : MonoBehaviour
 
     void Awake()
     {
-        // 싱글톤 + 중복 제거
+        // ✅ 싱글톤 + 중복 제거
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -65,8 +65,9 @@ public class CutsceneController : MonoBehaviour
         }
         Instance = this;
 
-        // 씬 전환 시에도 파괴되지 않고 유지
-        DontDestroyOnLoad(gameObject);
+        // ✅ 플레이 중일 때만 유지(에디터 Assertion 방지)
+        if (Application.isPlaying)
+            DontDestroyOnLoad(gameObject);
 
         // 씬 로드 이벤트 등록
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -74,23 +75,19 @@ public class CutsceneController : MonoBehaviour
 
     void OnDestroy()
     {
-        // 씬 로드 이벤트 해제
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Start()
     {
-        
-        // GameObject.Find가 씬 로드 직후 실패하는 것을 방지
         StartCoroutine(SetupAfterDelay());
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // 씬 로드 완료 후 1프레임 딜레이
         StartCoroutine(SetupAfterDelay());
     }
-    
+
     private IEnumerator SetupAfterDelay()
     {
         yield return null; // 1프레임 대기
@@ -107,13 +104,13 @@ public class CutsceneController : MonoBehaviour
             string now = SceneManager.GetActiveScene().name;
             int idx = sceneFlow.IndexOf(now);
             if (idx >= 0) currentIndex = idx;
-            else Debug.LogWarning($"[CutsceneController] sceneFlow에 현재 씬({now})이 없습니다. 씬 전환 시 에러가 발생할 수 있습니다.");
+            else Debug.LogWarning($"[CutsceneController] sceneFlow에 현재 씬({now})이 없습니다.");
         }
 
-        // 2) FadePanel 자동 연결 
+        // 2) FadePanel 자동 연결
         TryAutoFindFadePanel();
 
-        // 3) 검은 화면 고정 방지: 항상 씬 진입 시 페이드 인
+        // 3) 항상 씬 진입 시 페이드 인
         FadeIn();
 
         // 4) (선택) 스토리 자동 넘김
@@ -131,7 +128,6 @@ public class CutsceneController : MonoBehaviour
 
     private void TryAutoFindFadePanel()
     {
-       
         var go = GameObject.Find(fadePanelObjectName);
         if (go != null)
         {
@@ -143,7 +139,6 @@ public class CutsceneController : MonoBehaviour
             }
         }
 
-        // 못 찾았으면 경고만 
         fadePanel = null;
         Debug.LogWarning($"[CutsceneController] {fadePanelObjectName}을(를) 찾지 못했습니다. (페이드 없이 전환될 수 있음)");
     }
@@ -153,9 +148,8 @@ public class CutsceneController : MonoBehaviour
         if (fadePanel == null) return;
 
         fadePanel.DOKill(true);
-        fadePanel.raycastTarget = false; // 마우스 클릭 방지 해제
+        fadePanel.raycastTarget = false;
 
-       
         fadePanel.color = new Color(0, 0, 0, 1f);
         fadePanel.DOFade(0f, fadeTime).SetUpdate(true);
     }
@@ -172,7 +166,6 @@ public class CutsceneController : MonoBehaviour
             return;
         }
 
-        // FadePanel이 없다면 페이드 없이 바로 로드
         if (fadePanel == null)
         {
             SceneManager.LoadScene(sceneName);
@@ -180,9 +173,8 @@ public class CutsceneController : MonoBehaviour
         }
 
         fadePanel.DOKill(true);
-        fadePanel.raycastTarget = true; // 페이드 중 사용자 입력 방지
+        fadePanel.raycastTarget = true;
 
-        
         fadePanel.DOFade(1f, fadeTime)
             .SetUpdate(true)
             .OnComplete(() => SceneManager.LoadScene(sceneName));
@@ -197,7 +189,7 @@ public class CutsceneController : MonoBehaviour
     {
         if (sceneFlow == null || sceneFlow.Count == 0)
         {
-            Debug.LogError("[CutsceneController] sceneFlow가 비어있습니다! Inspector/코드에서 채워주세요.");
+            Debug.LogError("[CutsceneController] sceneFlow가 비어있습니다!");
             return;
         }
 
@@ -210,5 +202,12 @@ public class CutsceneController : MonoBehaviour
 
         string nextScene = sceneFlow[nextIndex];
         FadeOutAndLoad(nextScene);
+    }
+
+    // ✅ main1 Start 버튼에서 쓰는 "인자 없는" 함수 (Inspector에 뜸!)
+    // main1 -> story1 로 바로 점프하고, 이후 story1-2 -> stage1... 기존 순서대로 진행
+    public void StartFromMain()
+    {
+        LoadScene("story1");
     }
 }
