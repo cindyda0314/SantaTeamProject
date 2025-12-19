@@ -701,8 +701,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 992714206}
   openingBGM: {fileID: 8300000, guid: 7daebfe5e049d7d448ae9ca6454f3b6f, type: 3}
+  gameBGM: {fileID: 8300000, guid: d2942d638850bdd4a9ecd67a5143666c, type: 3}
   endingBGM: {fileID: 8300000, guid: 93a91b5cfadb1364082428f536cbd340, type: 3}
   openingVol: 0.35
+  gameVol: 0.3
   endingVol: 0.35
 --- !u!82 &992714206
 AudioSource:
