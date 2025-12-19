@@ -3,31 +3,54 @@ using UnityEngine.SceneManagement;
 
 public class UIGameManager : MonoBehaviour
 {
-    private static bool isRetry = false;   // ⭐ 씬 재시작 여부 저장
+
+    private static bool isRetry = false;
 
     [Header("UI 패널")]
-    public GameObject titleScreenPanel;   // 시작 화면
+    public GameObject titleScreenPanel;   // 시작 화면(START 버튼 포함)
     public GameObject gameOverPanel;      // 게임 오버 화면
-    public GameObject healthBar;   // 체력바
+    public GameObject healthBar;          // 체력바
+
+    
+    [Header("추가 타이틀 패널(옵션)")]
+    public GameObject titlePanel;
+
+    void OnEnable()
+    {
+        // 씬이 바뀔 때 isRetry를 자동으로 초기화하기 위함
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+    }
+
+    private void OnActiveSceneChanged(Scene oldScene, Scene newScene)
+    {
+        if (oldScene.buildIndex != newScene.buildIndex)
+        {
+            isRetry = false;
+        }
+    }
 
     void Start()
     {
-        // Retry로 들어온 경우
+        // Retry로 들어온 경우(같은 씬 재시작)
         if (isRetry)
         {
-            if (titleScreenPanel != null) titleScreenPanel.SetActive(false);
-            if (gameOverPanel != null) gameOverPanel.SetActive(false);
-            if (healthBar != null) healthBar.SetActive(true); //체력바
-       
+            SafeSetActive(titleScreenPanel, false);
+            SafeSetActive(gameOverPanel, false);
+            SafeSetActive(healthBar, true);
+
             Time.timeScale = 1f;
             return;
         }
 
-        // 처음 실행한 경우
-        if (titleScreenPanel != null) titleScreenPanel.SetActive(true);
-        if (gameOverPanel != null) gameOverPanel.SetActive(false);
-        if (healthBar != null) healthBar.SetActive(false);  //체력바
-       
+        // 처음 실행한 경우(또는 다른 씬에서 넘어온 경우)
+        SafeSetActive(titleScreenPanel, true);
+        SafeSetActive(gameOverPanel, false);
+        SafeSetActive(healthBar, false);
 
         Time.timeScale = 0f;
     }
@@ -35,9 +58,9 @@ public class UIGameManager : MonoBehaviour
     // Start 버튼
     public void StartGame()
     {
-        titleScreenPanel.SetActive(false);
-        if (healthBar != null) healthBar.SetActive(true); //체력바
-    
+        SafeSetActive(titleScreenPanel, false);
+        SafeSetActive(healthBar, true);
+
         Time.timeScale = 1f;
         Debug.Log("CLICK");
     }
@@ -45,39 +68,37 @@ public class UIGameManager : MonoBehaviour
     // 게임오버 패널 표시
     public void ShowGameOver()
     {
-        if (gameOverPanel != null)
-        {
-            gameOverPanel.SetActive(true);
-        }
+        SafeSetActive(gameOverPanel, true);
         Time.timeScale = 0f;
     }
 
     // Retry 버튼
     public void RetryGame()
     {
-        isRetry = true; // ⭐ 다음 씬 로드 때는 타이틀 안 보여주기
+        isRetry = true; 
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    //exit눌렀을 때 main으로 이동
+    // exit 눌렀을 때 main으로 이동
     public void GoMain()
     {
-        isRetry = false;   // 처음 화면처럼 보이게 하고 싶다면 false 유지
+        isRetry = false; // 메인으로 갈 땐 항상 초기화
         Time.timeScale = 1f;
-        SceneManager.LoadScene("main1");   // ← 네가 연결하려는 씬 이름
+        SceneManager.LoadScene("main1"); 
     }
 
-
-    // 12.16 씬 연결 추가
-    public GameObject titlePanel;
-
+    // titlePanel이 따로 있을 때만 사용
     public void StartStage()
     {
-        titlePanel.SetActive(false);
+        SafeSetActive(titlePanel, false);
     }
-    // 12.16 씬 연결 추가
 
+    // --------------------------
+    // 유틸: null 안전 활성/비활성
+    // --------------------------
+    private void SafeSetActive(GameObject go, bool on)
+    {
+        if (go != null) go.SetActive(on);
+    }
 }
-
-
