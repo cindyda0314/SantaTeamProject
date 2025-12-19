@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class UIGameManager : MonoBehaviour
 {
-
     private static bool isRetry = false;
 
     [Header("UI 패널")]
@@ -11,13 +10,11 @@ public class UIGameManager : MonoBehaviour
     public GameObject gameOverPanel;      // 게임 오버 화면
     public GameObject healthBar;          // 체력바
 
-    
     [Header("추가 타이틀 패널(옵션)")]
     public GameObject titlePanel;
 
     void OnEnable()
     {
-        // 씬이 바뀔 때 isRetry를 자동으로 초기화하기 위함
         SceneManager.activeSceneChanged += OnActiveSceneChanged;
     }
 
@@ -28,10 +25,10 @@ public class UIGameManager : MonoBehaviour
 
     private void OnActiveSceneChanged(Scene oldScene, Scene newScene)
     {
+        // Retry는 "같은 씬 재시작"에서만 의미
+        // 다른 씬으로 넘어가면 항상 초기화
         if (oldScene.buildIndex != newScene.buildIndex)
-        {
             isRetry = false;
-        }
     }
 
     void Start()
@@ -55,9 +52,33 @@ public class UIGameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    // Start 버튼
+    // ✅ Start 버튼 (main1에서는 "스토리 흐름 재시작", stage에서는 "게임 시작")
     public void StartGame()
     {
+        string now = SceneManager.GetActiveScene().name;
+
+        // 1) ✅ main1에서는: story1부터 시퀀스 재시작
+        if (now == "main1")
+        {
+            Debug.Log("[UIGameManager] main1 START -> Restart flow from story1");
+            Time.timeScale = 1f;
+
+            // titleScreenPanel은 굳이 안 숨겨도 되지만, 혹시 잠깐 깜빡임 방지용으로 숨김
+            SafeSetActive(titleScreenPanel, false);
+
+            if (CutsceneController.Instance != null)
+            {
+                CutsceneController.Instance.RestartFlowFromStory1();
+            }
+            else
+            {
+                // 혹시 CutsceneController가 없다면 직접 이동(최후 안전장치)
+                SceneManager.LoadScene("story1");
+            }
+            return;
+        }
+
+        // 2) ✅ stage 씬에서는: 기존대로 UI 숨기고 게임 시작
         SafeSetActive(titleScreenPanel, false);
         SafeSetActive(healthBar, true);
 
@@ -75,7 +96,7 @@ public class UIGameManager : MonoBehaviour
     // Retry 버튼
     public void RetryGame()
     {
-        isRetry = true; 
+        isRetry = true;
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -83,9 +104,14 @@ public class UIGameManager : MonoBehaviour
     // exit 눌렀을 때 main으로 이동
     public void GoMain()
     {
-        isRetry = false; // 메인으로 갈 땐 항상 초기화
+        isRetry = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("main1"); 
+
+        // ✅ CutsceneController가 있으면 페이드 포함해서 main1로
+        if (CutsceneController.Instance != null)
+            CutsceneController.Instance.GoToMain();
+        else
+            SceneManager.LoadScene("main1");
     }
 
     // titlePanel이 따로 있을 때만 사용

@@ -53,11 +53,13 @@ public class CutsceneController : MonoBehaviour
     public bool autoSetIndexBySceneName = true;
 
     private int currentIndex = 0;
+
+   
     private bool isLoading = false;
+    private Tween fadeTween = null;
 
     void Awake()
     {
-        // ✅ 싱글톤 + 중복 제거
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -65,17 +67,18 @@ public class CutsceneController : MonoBehaviour
         }
         Instance = this;
 
-        // ✅ 플레이 중일 때만 유지(에디터 Assertion 방지)
         if (Application.isPlaying)
             DontDestroyOnLoad(gameObject);
 
-        // 씬 로드 이벤트 등록
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        
+        KillFadeTween();
     }
 
     void Start()
@@ -90,7 +93,7 @@ public class CutsceneController : MonoBehaviour
 
     private IEnumerator SetupAfterDelay()
     {
-        yield return null; // 1프레임 대기
+        yield return null;
         SetupForCurrentScene();
     }
 
@@ -110,10 +113,13 @@ public class CutsceneController : MonoBehaviour
         // 2) FadePanel 자동 연결
         TryAutoFindFadePanel();
 
-        // 3) 항상 씬 진입 시 페이드 인
+        // 3) 씬 진입 시 페이드 인
         FadeIn();
 
-        // 4) (선택) 스토리 자동 넘김
+        // 4) 혹시 입력 막고 있으면 해제
+        if (fadePanel != null) fadePanel.raycastTarget = false;
+
+        // 5) (선택) 스토리 자동 넘김
         string nowScene = SceneManager.GetActiveScene().name;
         if (autoDelay > 0f && storyScenes.Contains(nowScene))
         {
@@ -128,6 +134,9 @@ public class CutsceneController : MonoBehaviour
 
     private void TryAutoFindFadePanel()
     {
+        
+        fadePanel = null;
+
         var go = GameObject.Find(fadePanelObjectName);
         if (go != null)
         {
@@ -139,19 +148,41 @@ public class CutsceneController : MonoBehaviour
             }
         }
 
-        fadePanel = null;
-        Debug.LogWarning($"[CutsceneController] {fadePanelObjectName}을(를) 찾지 못했습니다. (페이드 없이 전환될 수 있음)");
+        // 못 찾았으면 경고
+        Debug.LogWarning($"[CutsceneController] {fadePanelObjectName}을(를) 찾지 못했습니다. (페이드 없이 전환)");
+    }
+
+    
+    private void KillFadeTween()
+    {
+        if (fadeTween != null && fadeTween.IsActive())
+        {
+            fadeTween.Kill(false);
+        }
+        fadeTween = null;
+
+        // fadePanel 자체에 걸려있던 트윈도 정리 (안전)
+        if (fadePanel != null)
+        {
+            // DOTween이 target으로 관리하는 트윈까지 싹 정리
+            DOTween.Kill(fadePanel, false);
+            fadePanel.DOKill(false);
+        }
     }
 
     private void FadeIn()
     {
         if (fadePanel == null) return;
 
-        fadePanel.DOKill(true);
-        fadePanel.raycastTarget = false;
+        KillFadeTween();
 
+        fadePanel.raycastTarget = false;
         fadePanel.color = new Color(0, 0, 0, 1f);
-        fadePanel.DOFade(0f, fadeTime).SetUpdate(true);
+
+        fadeTween = fadePanel
+            .DOFade(0f, fadeTime)
+            .SetUpdate(true)
+            .SetLink(fadePanel.gameObject, LinkBehaviour.KillOnDestroy); 
     }
 
     private void FadeOutAndLoad(string sceneName)
@@ -166,20 +197,34 @@ public class CutsceneController : MonoBehaviour
             return;
         }
 
+        // 씬 전환 직전에 혹시 자동 Invoke 걸린 것 있으면 취소
+        CancelInvoke(nameof(LoadNextScene));
+
+        // FadePanel 없으면 바로 로드
         if (fadePanel == null)
         {
             SceneManager.LoadScene(sceneName);
             return;
         }
 
-        fadePanel.DOKill(true);
+        KillFadeTween();
+
         fadePanel.raycastTarget = true;
 
-        fadePanel.DOFade(1f, fadeTime)
+        fadeTween = fadePanel
+            .DOFade(1f, fadeTime)
             .SetUpdate(true)
-            .OnComplete(() => SceneManager.LoadScene(sceneName));
+            .SetLink(fadePanel.gameObject, LinkBehaviour.KillOnDestroy) 
+            .OnComplete(() =>
+            {
+                // OnComplete 시점에 객체가 살아있지 않을 수도 있으니 방어
+                SceneManager.LoadScene(sceneName);
+            });
     }
 
+    // -------------------------
+    // 외부 호출
+    // -------------------------
     public void LoadScene(string sceneName)
     {
         FadeOutAndLoad(sceneName);
@@ -204,10 +249,29 @@ public class CutsceneController : MonoBehaviour
         FadeOutAndLoad(nextScene);
     }
 
-    // ✅ main1 Start 버튼에서 쓰는 "인자 없는" 함수 (Inspector에 뜸!)
-    // main1 -> story1 로 바로 점프하고, 이후 story1-2 -> stage1... 기존 순서대로 진행
+    public void RestartFlowFromStory1()
+    {
+        int idx = sceneFlow.IndexOf("story1");
+        if (idx < 0)
+        {
+            Debug.LogError("[CutsceneController] sceneFlow에 story1이 없습니다!");
+            return;
+        }
+
+        isLoading = false;
+        currentIndex = idx;
+
+        FadeOutAndLoad("story1");
+    }
+
     public void StartFromMain()
     {
-        LoadScene("story1");
+        RestartFlowFromStory1();
+    }
+
+    public void GoToMain()
+    {
+        isLoading = false;
+        FadeOutAndLoad("main1");
     }
 }
