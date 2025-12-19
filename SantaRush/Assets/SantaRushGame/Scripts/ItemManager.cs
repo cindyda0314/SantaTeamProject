@@ -7,7 +7,7 @@ public class ItemManager : MonoBehaviour
     public static ItemManager instance;
 
     [Header("UI")]
-    public TMP_Text itemCountText;   // ⭐ 추가 (TMP면 TMP_Text) 12/19
+    public TMP_Text itemCountText;   
 
     private int totalItemCount = 0; // 씬 전체 아이템 수 
     private int collectedItemCount = 0; // 플레이어가 먹은 개수
@@ -28,7 +28,7 @@ public class ItemManager : MonoBehaviour
         totalItemCount = items.Length;
         collectedItemCount = 0;
 
-        UpdateUI();   // ⭐ 시작 시 UI 초기화 12/19
+        UpdateUI();   // 시작 시 UI 초기화 12/19
 
         Debug.Log($"[ItemManager] 아이템 총 개수: {totalItemCount}");
     }
@@ -36,7 +36,7 @@ public class ItemManager : MonoBehaviour
     public void CollectItem()
     {
         collectedItemCount++;
-        UpdateUI();   // ⭐ 먹을 때마다 UI 갱신 12/19
+        UpdateUI();   // 먹을 때마다 UI 갱신 12/19
         Debug.Log($"[Item] {collectedItemCount}/{totalItemCount} 수집됨");
 
         if (collectedItemCount == totalItemCount)

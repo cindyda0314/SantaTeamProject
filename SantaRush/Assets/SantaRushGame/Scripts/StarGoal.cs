@@ -34,7 +34,7 @@ public class StarGoal : MonoBehaviour
 
         cleared = true;
 
-        // ✅ 별 먹는 순간 배경음 즉시 종료
+        // 별 먹는 순간 배경음 즉시 종료
         BGMManager.Instance?.StopBGMNow();
 
         gameObject.SetActive(false);

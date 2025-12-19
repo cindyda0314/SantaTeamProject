@@ -9,7 +9,7 @@ public class ImageSequence : MonoBehaviour
     public float delay = 2f;    // 이미지 전환 간격
     private int index = 0;
     private float timer = 0f;
-    // 📌 컴파일 오류 해결: finished 변수 선언 추가
+ 
     private bool finished = false; 
 
 
@@ -41,7 +41,7 @@ public class ImageSequence : MonoBehaviour
                 finished = true;
                 Debug.Log("🎬 컷신 끝 → CutsceneController 호출");
 
-                // 📌 다음 씬 로드 요청
+             
                 if (CutsceneController.Instance != null)
                 {
                     CutsceneController.Instance.LoadNextScene();

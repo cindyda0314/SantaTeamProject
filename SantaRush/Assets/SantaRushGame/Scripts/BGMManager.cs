@@ -87,14 +87,14 @@ public class BGMManager : MonoBehaviour
 
         switch (sceneName)
         {
-            // ✅ main1: Start 버튼 누를 때만 오프닝 재생
+            // main1: Start 버튼 누를 때만 오프닝 재생
             case "main1":
                 preparedClip = openingBGM;
                 preparedVol = openingVol;
                 autoPlayOnLoad = false;
                 break;
 
-            // ✅ story1 / story1-2: 오프닝 유지 (자동재생)
+            // story1 / story1-2: 오프닝 유지 (자동재생)
             case "story1":
             case "story1-2":
                 preparedClip = openingBGM;
@@ -102,7 +102,7 @@ public class BGMManager : MonoBehaviour
                 autoPlayOnLoad = true;
                 break;
 
-            // ✅ stage는 전부 무음
+            // stage는 전부 무음
             case "stage1":
             case "stage2":
             case "stage3":
@@ -111,7 +111,7 @@ public class BGMManager : MonoBehaviour
                 autoPlayOnLoad = false;
                 break;
 
-            // ✅ 엔딩 자동재생
+            // 엔딩 자동재생
             case "story5":
             case "main2":
                 preparedClip = endingBGM;
@@ -119,7 +119,7 @@ public class BGMManager : MonoBehaviour
                 autoPlayOnLoad = true;
                 break;
 
-            // ✅ 기타 스토리 무음
+            // 기타 스토리 무음
             case "story2":
             case "story3":
             case "story4":

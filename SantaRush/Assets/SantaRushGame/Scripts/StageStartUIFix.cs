@@ -4,7 +4,7 @@ public class StageStartUIFix : MonoBehaviour
 {
     void OnEnable()
     {
-        // 혹시 다른 데서 꺼놨다면 다시 켬
+        
         gameObject.SetActive(true);
     }
 

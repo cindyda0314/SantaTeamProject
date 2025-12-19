@@ -57,7 +57,7 @@ public class CutsceneController : MonoBehaviour
 
     void Awake()
     {
-        // ✅ 싱글톤 + 중복 제거
+        // 싱글톤 + 중복 제거
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -80,14 +80,14 @@ public class CutsceneController : MonoBehaviour
 
     void Start()
     {
-        // Start 시에 바로 Setup 하지 않고 1프레임 딜레이를 줍니다.
-        // GameObject.Find가 씬 로드 직후 실패하는 것을 방지합니다.
+        
+        // GameObject.Find가 씬 로드 직후 실패하는 것을 방지
         StartCoroutine(SetupAfterDelay());
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // 씬 로드 완료 후 1프레임 딜레이를 줍니다.
+        // 씬 로드 완료 후 1프레임 딜레이
         StartCoroutine(SetupAfterDelay());
     }
     
@@ -110,7 +110,7 @@ public class CutsceneController : MonoBehaviour
             else Debug.LogWarning($"[CutsceneController] sceneFlow에 현재 씬({now})이 없습니다. 씬 전환 시 에러가 발생할 수 있습니다.");
         }
 
-        // 2) FadePanel 자동 연결 (이전 답변에서 설명드렸듯이, 여기서 경고가 뜬다면 씬에 'FadePanel'이 없거나 비활성화된 것입니다.)
+        // 2) FadePanel 자동 연결 
         TryAutoFindFadePanel();
 
         // 3) 검은 화면 고정 방지: 항상 씬 진입 시 페이드 인
@@ -131,7 +131,7 @@ public class CutsceneController : MonoBehaviour
 
     private void TryAutoFindFadePanel()
     {
-        // 씬에 FadePanel이 있으면 그걸 잡는다 (Canvas 안에 Image 하나)
+       
         var go = GameObject.Find(fadePanelObjectName);
         if (go != null)
         {
@@ -143,7 +143,7 @@ public class CutsceneController : MonoBehaviour
             }
         }
 
-        // 못 찾았으면 경고만 (없어도 씬 전환은 됨)
+        // 못 찾았으면 경고만 
         fadePanel = null;
         Debug.LogWarning($"[CutsceneController] {fadePanelObjectName}을(를) 찾지 못했습니다. (페이드 없이 전환될 수 있음)");
     }
@@ -155,7 +155,7 @@ public class CutsceneController : MonoBehaviour
         fadePanel.DOKill(true);
         fadePanel.raycastTarget = false; // 마우스 클릭 방지 해제
 
-        // ✅ 씬 로드 후 화면이 완전히 검게 되지 않도록, 시작 알파 1 → 0으로 확실히 내림 (Fade In)
+       
         fadePanel.color = new Color(0, 0, 0, 1f);
         fadePanel.DOFade(0f, fadeTime).SetUpdate(true);
     }
@@ -182,7 +182,7 @@ public class CutsceneController : MonoBehaviour
         fadePanel.DOKill(true);
         fadePanel.raycastTarget = true; // 페이드 중 사용자 입력 방지
 
-        // ✅ 알파 0 → 1로 올림 (Fade Out) 후 씬 로드
+        
         fadePanel.DOFade(1f, fadeTime)
             .SetUpdate(true)
             .OnComplete(() => SceneManager.LoadScene(sceneName));
